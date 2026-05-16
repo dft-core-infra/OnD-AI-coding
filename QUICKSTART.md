@@ -1,106 +1,114 @@
 # QUICKSTART — CLI Setup Guide
 
-Get your RyzenAI 32GB system running with Vulkan-accelerated local models. All commands execute in **Windows Terminal**.
+Get your 32GB system running with LM Studio + opencode for Vulkan-accelerated local inference. All commands execute in **Windows Terminal**.
+
+> **Scope**: This guide covers LM Studio + opencode only. Ollama steps are deferred.
 
 ---
 
-## 1. Install Tools
+## 1. Install LM Studio
 
 ```powershell
-# Install Ollama
-winget install Ollama.Ollama --accept-package-agreements --accept-source-agreements
-
-# Install LM Studio
 winget install ElementLabs.LMStudio --accept-package-agreements --accept-source-agreements
 ```
 
-Verify installation:
+**Checkpoint**: Verify installation.
 
 ```powershell
-ollama --version
 lms --version
 ```
 
 ---
 
-## 2. Configure Environment
-
-Set Vulkan as the default inference backend:
-
-```powershell
-[System.Environment]::SetEnvironmentVariable('OLLAMA_LLM_LIBRARY', 'vulkan', 'Machine')
-[System.Environment]::SetEnvironmentVariable('OLLAMA_MAX_LOADED_MODELS', '1', 'Machine')
-```
-
-Verify:
-
-```powershell
-$env:OLLAMA_LLM_LIBRARY
-$env:OLLAMA_MAX_LOADED_MODELS
-```
-
----
-
-## 3. Pull Models
-
-### Build Model — Gemma 4B
-
-```powershell
-ollama pull gemma:4b
-```
-
-### Architect Model — Qwen 3.6 35B
-
-```powershell
-lms get qwen2.5-32b-instruct-q4_k_m
-```
-
-> **Note**: The `q4_k_m` quantization balances context depth with memory footprint on 32GB systems.
-
----
-
-## 4. Verify Engine Responsiveness
-
-### Test Ollama
-
-```powershell
-ollama run gemma:4b "Hello, test message."
-```
-
-### Test LM Studio Daemon
+## 2. Start LM Studio Daemon
 
 ```powershell
 lms start
+```
+
+**Checkpoint**: Confirm daemon is running.
+
+```powershell
 lms list
 ```
 
+Expected: empty model list (no models loaded yet).
+
 ---
 
-## 5. Configure opencode
-
-Copy the `opencode.json` from [`CONFIG.md`](CONFIG.md) into your project root, then run:
+## 3. Download Architect Model
 
 ```powershell
-opencode --model build
+lms get <model-id> --quant <quantization>
+```
+
+Replace `<model-id>` and `<quantization>` with the exact values from [`NOTES.md`](NOTES.md).
+
+**Checkpoint**: Verify model downloaded.
+
+```powershell
+lms list
+```
+
+Expected: architect model in the list.
+
+---
+
+## 4. Load Architect Model with Constraints
+
+```powershell
+lms load <model-id> --context-length 32768 --parallel-requests 1
+```
+
+**Checkpoint**: Verify model loaded.
+
+```powershell
+lms list
+```
+
+Expected: architect model showing `loaded` status.
+
+---
+
+## 5. Run opencode in Architect Mode
+
+```powershell
 opencode --model architect
 ```
 
+**Checkpoint**: Confirm opencode connects to LM Studio and loads the model.
+
 ---
 
-## 6. Monitor GPU Utilization
+## 6. Verify Single-Active-Model State
 
-Open **AMD Software: Adrenalin Edition** and navigate to:
-
-```
-Performance → Metrics → GPU Compute
+```powershell
+opencode status
 ```
 
-Verify that model inference is driving GPU utilization above 60% during active prompts.
+**Checkpoint**: Confirm only one model is resident. No build model should be loaded.
+
+---
+
+## 7. Switch to Build Mode (When Needed)
+
+```powershell
+lms unload --all
+opencode --model build
+```
+
+**Checkpoint**: Confirm build model is loaded and architect model is unloaded.
+
+---
+
+## ⚠️ Ollama Placeholder
+
+> Ollama steps are deferred to a future iteration. Do not attempt to orchestrate Ollama in this release. This section will be populated when Ollama support is re-evaluated.
 
 ---
 
 <div align="center">
 
-*You're set. Head to [SETUP.md](SETUP.md) for environment deep-dive or [CONFIG.md](CONFIG.md) for opencode configuration.*
+*You're set. Head to [SETUP.md](SETUP.md) for environment preparation or [CONFIG.md](CONFIG.md) for opencode configuration.*
 
 </div>

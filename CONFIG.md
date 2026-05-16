@@ -1,10 +1,10 @@
 # CONFIG — opencode.json Specification
 
-This document defines the `opencode.json` schema required to orchestrate the Build (Gemma 4B) and Architect (Qwen 3.6 35B) models with Vulkan acceleration on your RyzenAI 32GB system.
+This document defines the `opencode.json` schema for orchestrating the Architect model with Vulkan acceleration on 32GB RAM systems.
 
 ---
 
-## 1. Full Configuration
+## 1. Minimal Configuration
 
 Copy this into your project root as `opencode.json`:
 
@@ -18,21 +18,12 @@ Copy this into your project root as `opencode.json`:
     "backend": "vulkan"
   },
   "models": {
-    "build": {
-      "id": "Gemma-4B-Build",
-      "backend": "ollama",
-      "description": "Rapid code iteration — lightweight, fast inference"
-    },
     "architect": {
-      "id": "qwen2.5-32b-instruct-q4_k_m",
+      "id": "<lm-studio-model-id>",
+      "quantization": "<quantization-string>",
       "backend": "lms",
       "description": "Deep reasoning & planning — parameter-rich architecture mode"
     }
-  },
-  "memory": {
-    "max_resident_mb": 28000,
-    "eviction_policy": "least_recently_used",
-    "flush_on_switch": true
   },
   "logging": {
     "level": "info",
@@ -41,75 +32,65 @@ Copy this into your project root as `opencode.json`:
 }
 ```
 
+> **Note**: Replace `<lm-studio-model-id>` and `<quantization-string>` with exact values from [`NOTES.md`](NOTES.md).
+
 ---
 
 ## 2. Schema Reference
 
 ### `engine` — Inference Controls
 
-| Key | Type | Default | Required | Description |
-|:---|:---|:---|:---|:---|
-| `concurrency` | int | `1` | Yes | Max parallel inference threads |
-| `context_window` | int | `32768` | Yes | Token context length limit |
-| `single_resident` | bool | `true` | Yes | Enforce one model in memory |
-| `unload_on_switch` | bool | `true` | Yes | Auto-unload previous model |
-| `backend` | string | `"vulkan"` | Yes | Inference backend (`vulkan` or `directml`) |
+| Key | Type | Default | Required | Description | Source |
+|:---|:---|:---|:---|:---|:---|
+| `concurrency` | int | `1` | Yes | Max parallel inference threads | opencode docs |
+| `context_window` | int | `32768` | Yes | Token context length limit | opencode docs |
+| `single_resident` | bool | `true` | Yes | Enforce one model in memory | opencode docs |
+| `unload_on_switch` | bool | `true` | Yes | Auto-unload previous model | opencode docs |
+| `backend` | string | `"vulkan"` | Yes | Inference backend | opencode docs |
 
 ### `models` — Model Definitions
 
 | Key | Type | Description |
 |:---|:---|:---|
-| `build.id` | string | Ollama model identifier |
-| `build.backend` | string | Inference engine (`ollama`) |
 | `architect.id` | string | LM Studio model identifier |
+| `architect.quantization` | string | Quantization string (e.g., `q4_k_m`) |
 | `architect.backend` | string | Inference engine (`lms`) |
-
-### `memory` — Memory Management
-
-| Key | Type | Default | Description |
-|:---|:---|:---|:---|
-| `max_resident_mb` | int | `28000` | Maximum resident model size in MB |
-| `eviction_policy` | string | `"least_recently_used"` | Model eviction strategy |
-| `flush_on_switch` | bool | `true` | Force VRAM flush during model switch |
+| `architect.description` | string | Human-readable description |
 
 ---
 
-## 3. Usage
+## 3. Lifecycle — Unload/Load Sequence
 
-### Switch to Build Mode
-
-```powershell
-opencode --model build
-```
-
-### Switch to Architect Mode
+Execute this sequence when switching models:
 
 ```powershell
-opencode --model architect
-```
+# 1. Unload current model
+lms unload --all
 
-### Check Active Model
+# 2. Wait for VRAM flush (2-3 seconds)
+Start-Sleep -Seconds 3
 
-```powershell
+# 3. Load new model with constraints
+lms load <model-id> --context-length 32768 --parallel-requests 1
+
+# 4. Verify single model state
 opencode status
 ```
 
+**Expected after step 4**: Only the new model is resident. No secondary models loaded.
+
 ---
 
-## 4. Memory Policy Enforcement
+## 4. Definition of Done
 
-The `single_resident` policy operates as follows:
+Verify completion with this checklist:
 
-1. **Load Request Received**: `opencode` checks for any resident model
-2. **Unload Previous**: If a model is loaded, it is evicted (`unload_on_switch`)
-3. **VRAM Flush**: `flush_on_switch` forces GPU VRAM cleanup
-4. **Load New Model**: New model loads into clean memory space
-5. **Verify**: System memory and VRAM checked for stability
-
-This prevents:
-- OOM (Out of Memory) crashes
-- System paging during inference
-- Context corruption from stale weights
+- [ ] Architect model downloads successfully via `lms get`
+- [ ] Architect model loads with context=32768, concurrency=1
+- [ ] `opencode status` shows architect model loaded
+- [ ] `opencode status` shows no secondary models
+- [ ] `lms list` confirms only one model in `loaded` state
+- [ ] Vulkan backend detected via `lms info --gpu`
 
 ---
 

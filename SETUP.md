@@ -1,45 +1,108 @@
-# SETUP — Environment & Vulkan Configuration
+# SETUP — Vulkan & LM Studio Configuration
 
-This document covers the environment configuration required to run Vulkan-accelerated inference on your RyzenAI iGPU with 32GB RAM.
-
----
-
-## 1. Vulkan Backend Initialization
-
-### 1.1 Environment Variables
-
-Set the following system-level variables:
-
-```powershell
-# Force Vulkan backend for Ollama
-[System.Environment]::SetEnvironmentVariable('OLLAMA_LLM_LIBRARY', 'vulkan', 'Machine')
-
-# Enforce single active model (critical for 32GB systems)
-[System.Environment]::SetEnvironmentVariable('OLLAMA_MAX_LOADED_MODELS', '1', 'Machine')
-
-# Optional: Limit GPU layers for stability
-[System.Environment]::SetEnvironmentVariable('OLLAMA_NUM_GPU', '99', 'Machine')
-```
-
-### 1.2 Vulkan ICD Verification
-
-Ensure your AMD Vulkan Installable Client Driver (ICD) is properly registered:
-
-```powershell
-Get-ChildItem -Path "C:\Windows\System32\vk_icd*" | Select-Object Name
-```
-
-Expected output includes `vk_icd_amd64.dll` or similar AMD Vulkan ICD file.
-
-If missing, install the latest **AMD Vulkan Runtime** from [AMD Drivers](https://www.amd.com/en/support).
+This document covers the procedural setup required to run Vulkan-accelerated inference on your system with 32GB RAM.
 
 ---
 
-## 2. Memory Management Constraints
+## 1. Vulkan Prerequisites
 
-### 2.1 Single-Active-Model Policy
+### 1.1 Verify Vulkan ICD Files
 
-On 32GB RAM systems, loading two models simultaneously causes system-level paging and inference degradation. The `opencode.json` enforces:
+Confirm Vulkan Installable Client Driver (ICD) files exist on your system:
+
+```powershell
+Get-ChildItem -Path "C:\Windows\System32\vk_icd*.json" | Select-Object Name, Length
+```
+
+**Expected**: AMD Vulkan ICD file (e.g., `vk_icd_amd64.json`).
+
+**If missing**: Install the latest AMD Vulkan Runtime from [AMD Drivers](https://www.amd.com/en/support).
+
+### 1.2 Verify Vulkan Runtime
+
+```powershell
+lms info --gpu
+```
+
+**Expected**: Vulkan listed as the active backend with GPU compute units detected.
+
+---
+
+## 2. LM Studio CLI Setup
+
+### 2.1 Start Daemon
+
+```powershell
+lms start
+```
+
+**Expected output**: Daemon listening on port 1234 (or configured port).
+
+### 2.2 Stop Daemon
+
+```powershell
+lms stop
+```
+
+### 2.3 Check Daemon Status
+
+```powershell
+lms status
+```
+
+**Expected**: Daemon running, port accessible.
+
+---
+
+## 3. Model Management with Constraints
+
+### 3.1 Download Model
+
+```powershell
+lms get <model-id> --quant <quantization>
+```
+
+Use exact model ID and quantization from [`NOTES.md`](NOTES.md).
+
+### 3.2 Load Model with Context/Concurrency Limits
+
+```powershell
+lms load <model-id> --context-length 32768 --parallel-requests 1
+```
+
+**Note**: If CLI lacks these flags, configure via LM Studio config file. See [`NOTES.md`](NOTES.md) for source.
+
+### 3.3 Unload Model
+
+```powershell
+lms unload --all
+```
+
+### 3.4 Verify Loaded Models
+
+```powershell
+lms list
+```
+
+**Expected**: One model showing `loaded` status. No secondary models.
+
+---
+
+## 4. opencode Configuration
+
+### 4.1 Set Backend
+
+Ensure opencode uses the Vulkan backend:
+
+```powershell
+# Set via opencode.json (see CONFIG.md)
+# Or via environment variable if supported:
+$env:OPENCODE_BACKEND = "vulkan"
+```
+
+### 4.2 Enforce Single Active Model
+
+Configure `opencode.json` with:
 
 ```json
 {
@@ -50,70 +113,7 @@ On 32GB RAM systems, loading two models simultaneously causes system-level pagin
 }
 ```
 
-This ensures:
-- Only one model resident in VRAM/RAM at any time
-- Automatic unloading of the previous model before the next load
-- No system paging or OOM crashes during model switching
-
-### 2.2 Context Window & Concurrency
-
-| Parameter | Value | Rationale |
-|:---|:---|:---|
-| `context_window` | 32768 | Fits within 32GB envelope with model weights |
-| `concurrency` | 1 | Prevents memory fragmentation during inference |
-
-These values are enforced in `opencode.json` (see [`CONFIG.md`](CONFIG.md)).
-
----
-
-## 3. LM Studio Configuration
-
-### 3.1 Headless Daemon Setup
-
-Start the LM Studio daemon from CLI:
-
-```powershell
-lms start --port 1234
-```
-
-### 3.2 Model Loading with Constraints
-
-```powershell
-lms load qwen2.5-32b-instruct-q4_k_m --context-length 32768 --parallel-requests 1
-```
-
-### 3.3 Model Unloading
-
-```powershell
-lms unload --all
-```
-
----
-
-## 4. Ollama Configuration
-
-### 4.1 Create Custom Modelfile
-
-Create `Build.Modelfile`:
-
-```dockerfile
-FROM gemma:4b
-PARAMETER num_ctx 32768
-PARAMETER num_gpu 99
-PARAMETER num_thread 8
-```
-
-### 4.2 Build Custom Model
-
-```powershell
-ollama create Gemma-4B-Build -f Build.Modelfile
-```
-
-### 4.3 Run with Constraints
-
-```powershell
-ollama run Gemma-4B-Build
-```
+See [`CONFIG.md`](CONFIG.md) for full schema.
 
 ---
 
@@ -121,10 +121,11 @@ ollama run Gemma-4B-Build
 
 | Check | Command | Expected |
 |:---|:---|:---|
-| Vulkan library loaded | `ollama list` | No DirectML warnings |
-| Single model loaded | `lms list` | One model showing `loaded` |
-| GPU utilization | AMD Adrenalin → Performance | GPU Compute > 60% during inference |
-| Memory pressure | Task Manager → Memory | No paging > 10% during model switch |
+| Vulkan ICD exists | `Get-ChildItem vk_icd*.json` | AMD ICD file present |
+| Vulkan backend active | `lms info --gpu` | Vulkan listed as backend |
+| Daemon running | `lms status` | Running, port accessible |
+| Model loaded | `lms list` | One model showing `loaded` |
+| Single model state | `opencode status` | One model resident, no secondary |
 
 ---
 

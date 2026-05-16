@@ -1,8 +1,8 @@
 <div align="center">
 
-# RyzenAI Local Coding Setup
+# Windows 11 Vulkan Local Coding Setup
 
-### 32GB RAM · Ryzen iGPU · Vulkan Backend
+### 32GB RAM · Vulkan Backend · LM Studio + opencode
 
 <div style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/Backend-Vulkan-orange?style=for-the-badge&logo=vulkan" alt="Vulkan Backend" />
@@ -10,46 +10,41 @@
   <img src="https://img.shields.io/badge/Engine-opencode-purple?style=for-the-badge" alt="opencode" />
 </div>
 
-**CLI-first local LLM orchestration for RyzenAI systems.**  
-Configure your 32GB RAM rig to run Gemma 4B (Build) and Qwen 3.6 35B (Architect) with Vulkan acceleration.
+**CLI-first local LLM orchestration for 32GB RAM systems.**  
+Configure your rig to run one model at a time with Vulkan acceleration via LM Studio and opencode.
 
 </div>
 
 ---
 
-## 🎯 Objectives
+## 🎯 Meta-Objectives
 
-| Goal | Detail |
+| Objective | Detail |
 |:---|:---|
-| **Performance-First** | Vulkan backend for iGPU acceleration on Ryzen AI hardware |
-| **Stability** | Single-Active-Model memory policy prevents system paging |
-| **CLI-Driven** | All setup via Windows Terminal — no GUI required |
-| **Reproducible** | `winget` installs, documented configs, authoritative references |
+| **Enable Local Coding** | LM Studio + opencode for single-model inference |
+| **Enforce Vulkan** | Vulkan backend for GPU-accelerated inference |
+| **Single-Active-Model** | Only one model resident in memory at a time |
+| **CLI-First** | All setup via Windows Terminal — no GUI required |
 
 ---
 
-## 🏗 Architecture Overview
+## 🏗 Architecture
 
 ```mermaid
-graph TD
+graph LR
     A[User] -->|opencode CLI| B[opencode.json]
-    B -->|Build Mode| C[Gemma 4B · Vulkan]
-    B -->|Architect Mode| D[Qwen 3.6 35B · Vulkan]
-    C -->|unload| E[Memory Manager]
-    D -->|unload| E
-    E -->|load| C
-    E -->|load| D
-    C -->|DirectML/Vulkan| F[Ryzen iGPU]
-    D -->|DirectML/Vulkan| F
+    B -->|Architect Mode| C[LM Studio Model · Vulkan]
+    C -->|unload| D[Memory Manager]
+    D -->|load| C
+    C -->|Vulkan| E[GPU]
     style C fill:#4A90E2,color:#fff
-    style D fill:#FF6B35,color:#fff
-    style E fill:#2C3E50,color:#fff
-    style F fill:#E74C3C,color:#fff
+    style D fill:#2C3E50,color:#fff
+    style E fill:#E74C3C,color:#fff
 ```
 
-**Key Design Decisions:**
+**Key Constraints:**
 - **Single Active Model**: Only one model resident in memory at a time
-- **32k Context / 1 Concurrency**: Optimized for 32GB RAM stability
+- **32k Context / 1 Concurrency**: Required for 32GB RAM stability
 - **Vulkan Backend**: Hardware-accelerated inference via Vulkan ICD
 
 ---
@@ -59,9 +54,9 @@ graph TD
 | File | Purpose |
 |:---|:---|
 | [`QUICKSTART.md`](QUICKSTART.md) | Step-by-step CLI setup guide |
-| [`SETUP.md`](SETUP.md) | Environment configuration & Vulkan setup |
-| [`CONFIG.md`](CONFIG.md) | `opencode.json` schema & usage |
-| [`NOTES.md`](NOTES.md) | Technical justification & authoritative references |
+| [`SETUP.md`](SETUP.md) | Vulkan prerequisites & LM Studio setup |
+| [`CONFIG.md`](CONFIG.md) | `opencode.json` schema & lifecycle |
+| [`NOTES.md`](NOTES.md) | Design rationale & authoritative references |
 
 ---
 
@@ -75,6 +70,6 @@ graph TD
 
 <div align="center">
 
-*Built for the RyzenAI community. Optimize. Iterate. Deploy.*
+*Optimize. Iterate. Deploy.*
 
 </div>
