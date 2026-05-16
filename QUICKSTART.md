@@ -1,6 +1,6 @@
 # QUICKSTART — CLI Setup Guide
 
-Get your 32GB system running with LM Studio + opencode for Vulkan-accelerated local inference. All commands execute in **Windows Terminal**.
+Get your 32GB system running with LM Studio + opencode for local inference. All commands execute in **Windows Terminal**.
 
 > **Scope**: This guide covers LM Studio + opencode only. Ollama steps are deferred.
 
@@ -39,10 +39,8 @@ Expected: empty model list (no models loaded yet).
 ## 3. Download Architect Model
 
 ```powershell
-lms get <model-id> --quant <quantization>
+lms get Qwen/Qwen3.6-35B-Instruct-GGUF --quant q4_k_m
 ```
-
-Replace `<model-id>` and `<quantization>` with the exact values from [`NOTES.md`](NOTES.md).
 
 **Checkpoint**: Verify model downloaded.
 
@@ -57,7 +55,7 @@ Expected: architect model in the list.
 ## 4. Load Architect Model with Constraints
 
 ```powershell
-lms load <model-id> --context-length 32768 --parallel-requests 1
+lms load Qwen/Qwen3.6-35B-Instruct-GGUF --context-length 32768 --parallel-requests 1
 ```
 
 **Checkpoint**: Verify model loaded.

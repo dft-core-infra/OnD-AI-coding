@@ -1,17 +1,16 @@
 <div align="center">
 
-# Windows 11 Vulkan Local Coding Setup
+# Windows 11 Local Coding Setup
 
-### 32GB RAM · Vulkan Backend · LM Studio + opencode
+### 32GB RAM · LM Studio + opencode
 
 <div style="margin: 20px 0;">
-  <img src="https://img.shields.io/badge/Backend-Vulkan-orange?style=for-the-badge&logo=vulkan" alt="Vulkan Backend" />
   <img src="https://img.shields.io/badge/OS-Windows%2011%2024H2-blue?style=for-the-badge&logo=windows" alt="Windows 11" />
   <img src="https://img.shields.io/badge/Engine-opencode-purple?style=for-the-badge" alt="opencode" />
 </div>
 
 **CLI-first local LLM orchestration for 32GB RAM systems.**  
-Configure your rig to run one model at a time with Vulkan acceleration via LM Studio and opencode.
+Run a 35B model locally on your rig with LM Studio and opencode.
 
 </div>
 
@@ -22,7 +21,7 @@ Configure your rig to run one model at a time with Vulkan acceleration via LM St
 | Objective | Detail |
 |:---|:---|
 | **Enable Local Coding** | LM Studio + opencode for single-model inference |
-| **Enforce Vulkan** | Vulkan backend for GPU-accelerated inference |
+| **GPU-Accelerated Inference** | Hardware-accelerated inference via LM Studio |
 | **Single-Active-Model** | Only one model resident in memory at a time |
 | **CLI-First** | All setup via Windows Terminal — no GUI required |
 
@@ -33,10 +32,10 @@ Configure your rig to run one model at a time with Vulkan acceleration via LM St
 ```mermaid
 graph LR
     A[User] -->|opencode CLI| B[opencode.json]
-    B -->|Architect Mode| C[LM Studio Model · Vulkan]
+    B -->|Architect Mode| C[LM Studio Model]
     C -->|unload| D[Memory Manager]
     D -->|load| C
-    C -->|Vulkan| E[GPU]
+    C -->|GPU| E[Hardware]
     style C fill:#4A90E2,color:#fff
     style D fill:#2C3E50,color:#fff
     style E fill:#E74C3C,color:#fff
@@ -45,7 +44,6 @@ graph LR
 **Key Constraints:**
 - **Single Active Model**: Only one model resident in memory at a time
 - **32k Context / 1 Concurrency**: Required for 32GB RAM stability
-- **Vulkan Backend**: Hardware-accelerated inference via Vulkan ICD
 
 ---
 
@@ -54,7 +52,7 @@ graph LR
 | File | Purpose |
 |:---|:---|
 | [`QUICKSTART.md`](QUICKSTART.md) | Step-by-step CLI setup guide |
-| [`SETUP.md`](SETUP.md) | Vulkan prerequisites & LM Studio setup |
+| [`SETUP.md`](SETUP.md) | LM Studio Daemon setup and model configuration |
 | [`CONFIG.md`](CONFIG.md) | `opencode.json` schema & lifecycle |
 | [`NOTES.md`](NOTES.md) | Design rationale & authoritative references |
 
@@ -64,7 +62,7 @@ graph LR
 
 - [Start Setup](QUICKSTART.md) — Get running in 5 minutes
 - [Configure opencode](CONFIG.md) — Memory policy & model definitions
-- [Technical Notes](NOTES.md) — Why we chose Vulkan, memory limits, and constraints
+- [Technical Notes](NOTES.md) — Context limits, concurrency, and constraints
 
 ---
 

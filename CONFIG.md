@@ -1,6 +1,6 @@
 # CONFIG — opencode.json Specification
 
-This document defines the `opencode.json` schema for orchestrating the Architect model with Vulkan acceleration on 32GB RAM systems.
+This document defines the `opencode.json` schema for orchestrating the Architect model on 32GB RAM systems.
 
 ---
 
@@ -12,17 +12,20 @@ Copy this into your project root as `opencode.json`:
 {
   "engine": {
     "concurrency": 1,
-    "context_window": 32768,
-    "single_resident": true,
-    "unload_on_switch": true,
-    "backend": "vulkan"
+    "context_window": 32768
   },
   "models": {
     "architect": {
-      "id": "<lm-studio-model-id>",
-      "quantization": "<quantization-string>",
+      "id": "Qwen/Qwen3.6-35B-Instruct-GGUF",
+      "quantization": "q4_k_m",
       "backend": "lms",
       "description": "Deep reasoning & planning — parameter-rich architecture mode"
+    },
+    "build": {
+      "id": "lmstudio-community/gemma-4b-instruct-q4_k_m.gguf",
+      "quantization": "q4_k_m",
+      "backend": "lms",
+      "description": "Fast code assistance — lightweight build mode model"
     }
   },
   "logging": {
@@ -32,21 +35,16 @@ Copy this into your project root as `opencode.json`:
 }
 ```
 
-> **Note**: Replace `<lm-studio-model-id>` and `<quantization-string>` with exact values from [`NOTES.md`](NOTES.md).
-
 ---
 
 ## 2. Schema Reference
 
 ### `engine` — Inference Controls
 
-| Key | Type | Default | Required | Description | Source |
-|:---|:---|:---|:---|:---|:---|
-| `concurrency` | int | `1` | Yes | Max parallel inference threads | opencode docs |
-| `context_window` | int | `32768` | Yes | Token context length limit | opencode docs |
-| `single_resident` | bool | `true` | Yes | Enforce one model in memory | opencode docs |
-| `unload_on_switch` | bool | `true` | Yes | Auto-unload previous model | opencode docs |
-| `backend` | string | `"vulkan"` | Yes | Inference backend | opencode docs |
+| Key | Type | Default | Required | Description |
+|:---|:---|:---|:---|:---|
+| `concurrency` | int | `1` | Yes | Max parallel inference threads |
+| `context_window` | int | `32768` | Yes | Token context length limit |
 
 ### `models` — Model Definitions
 
@@ -56,6 +54,10 @@ Copy this into your project root as `opencode.json`:
 | `architect.quantization` | string | Quantization string (e.g., `q4_k_m`) |
 | `architect.backend` | string | Inference engine (`lms`) |
 | `architect.description` | string | Human-readable description |
+| `build.id` | string | LM Studio model identifier |
+| `build.quantization` | string | Quantization string (e.g., `q4_k_m`) |
+| `build.backend` | string | Inference engine (`lms`) |
+| `build.description` | string | Human-readable description |
 
 ---
 
@@ -71,7 +73,7 @@ lms unload --all
 Start-Sleep -Seconds 3
 
 # 3. Load new model with constraints
-lms load <model-id> --context-length 32768 --parallel-requests 1
+lms load Qwen/Qwen3.6-35B-Instruct-GGUF --context-length 32768 --parallel-requests 1
 
 # 4. Verify single model state
 opencode status
@@ -90,7 +92,6 @@ Verify completion with this checklist:
 - [ ] `opencode status` shows architect model loaded
 - [ ] `opencode status` shows no secondary models
 - [ ] `lms list` confirms only one model in `loaded` state
-- [ ] Vulkan backend detected via `lms info --gpu`
 
 ---
 
