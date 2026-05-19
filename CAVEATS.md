@@ -10,6 +10,10 @@ This document provides that assessment. Not to discourage—local AI coding deli
 
 ---
 
+<div align="center">
+<img src="assets/CORY Socratic 2.png" alt="Honest dialogue about expectations" width="200"/>
+</div>
+
 ## Use Cases: What Works Well, What Struggles
 
 **Neutral Assessment:**
@@ -35,6 +39,8 @@ If your primary use case is cutting-edge framework assistance, complex distribut
 ---
 
 ## Quantization: The Quality/Fit Tradeoff
+
+<img src="assets/AI Cory - Concerned.png" alt="Quality tradeoff warning" width="180" align="right"/>
 
 **Neutral Assessment:**
 
@@ -62,7 +68,15 @@ Consider whether 32GB systems are the right target, or whether investing in 64GB
 
 ---
 
+<div align="center">
+<img src="assets/cora_coffe_1.png" alt="Take a moment to absorb the technical details" width="180"/>
+
+*Heavy technical section ahead - take your time*
+</div>
+
 ## Memory: The Real Bottleneck
+
+<img src="assets/cory-dna-strand-flying.png" alt="Technical deep-dive" width="200" align="right"/>
 
 **Neutral Assessment:**
 
@@ -92,6 +106,8 @@ If you're working with RAM constraints (16GB systems, heavily multitasking envir
 ---
 
 ## Hardware Investment: Upfront Costs vs. Cloud Subscriptions
+
+<img src="assets/CORY PC Cat.png" alt="Infrastructure investment reality" width="200" align="right"/>
 
 **Neutral Assessment:**
 
@@ -126,6 +142,8 @@ Be honest about your usage patterns before committing to hardware investment. Li
 ---
 
 ## Performance: Speed and Responsiveness
+
+<img src="assets/cory-007.png" alt="Performance precision" width="160" align="right"/>
 
 **Neutral Assessment:**
 
