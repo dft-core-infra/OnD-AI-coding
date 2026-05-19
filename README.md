@@ -19,6 +19,25 @@ Generate PowerShell scripts, troubleshoot systems, document infrastructure—all
 
 ---
 
+<div align="center">
+<table style="border: none; background: url('assets/Powerpoint Mask.png') no-repeat center; background-size: cover; width: 800px;">
+  <tr>
+    <td style="padding: 40px; background: rgba(255, 255, 255, 0.93);">
+      <h2 style="margin: 0 0 15px 0; color: #1a1a1a;">🚀 Transform Your Workflow</h2>
+      <p style="margin: 0; font-size: 1.1em; line-height: 1.6; color: #2a2a2a;">
+        <strong>Generate:</strong> PowerShell automation scripts<br/>
+        <strong>Troubleshoot:</strong> System errors with AI assistance<br/>
+        <strong>Document:</strong> Infrastructure configurations<br/>
+        <br/>
+        <em>All processing happens locally. Your data stays on your hardware.</em>
+      </p>
+    </td>
+  </tr>
+</table>
+</div>
+
+---
+
 ## Why This Matters
 
 You're an IT professional—support, network, infrastructure, maybe development. You have deep expertise in your domain. This guide helps you add a new capability: running powerful AI models locally for daily work. Generate automation scripts, troubleshoot error messages, write documentation. Practical tasks that justify the setup time.
