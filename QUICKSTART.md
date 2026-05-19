@@ -1,5 +1,9 @@
 # QUICKSTART: Get Running Fast
 
+<div align="center">
+<img src="assets/Droid.png" alt="Automation assistant icon" width="100"/>
+</div>
+
 **Goal:** Get LM Studio serving a model and opencode connected in under 10 minutes.
 
 **For:** 32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
@@ -69,6 +73,12 @@ lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m
 > `lms get qwen/qwen-2.5-9b-instruct-gguf --quant q4_k_m`
 
 **Download takes time.** The model is ~18-20GB. Progress displays in terminal.
+
+<div align="center">
+<img src="assets/cora_coffe_1.png" alt="Team member taking coffee break" width="200"/>
+
+*This is a good time to grab coffee. Model downloads take a few minutes.*
+</div>
 
 ---
 
@@ -176,6 +186,8 @@ Ollama integration is planned but not documented yet. Focus on LM Studio for now
 ---
 
 <div align="center">
+
+<img src="assets/AIN Green Stream - Survey Thanks.jpg" alt="Team celebration - Good job completing setup" width="800"/>
 
 **You're set up. Time to put it to work.**
 

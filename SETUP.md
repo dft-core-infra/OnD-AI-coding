@@ -4,6 +4,10 @@ QUICKSTART got you running. This document explains how the pieces work together,
 
 ---
 
+<div align="center">
+<img src="assets/cory-dna-strand-flying.png" alt="Team member exploring system architecture" width="250"/>
+</div>
+
 ## How LM Studio Works
 
 **LM Studio** is your model engine. It handles:
@@ -165,6 +169,12 @@ Create `opencode.json` in your working directory or home directory:
 
 ---
 
+<div align="center">
+<img src="assets/cora_coffe_1.png" alt="Team member taking coffee break" width="180"/>
+
+*Take a moment to verify everything is working*
+</div>
+
 ## Verification Checklist
 
 **After setup, verify:**
@@ -250,6 +260,10 @@ If responses feel slow:
 **Why this architecture:** Separation between workflow (opencode) and engine (LM Studio) means you can use other tools with the same LM Studio server. It's not locked to one client.
 
 ---
+
+<div align="center">
+<img src="assets/AI Cory - Concerned.png" alt="Team member troubleshooting technical issue" width="200"/>
+</div>
 
 ## Troubleshooting
 

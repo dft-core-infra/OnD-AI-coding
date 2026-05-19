@@ -72,6 +72,10 @@ This document shows our work—why we made specific choices, what we tested, wha
 
 ---
 
+<div align="center">
+<img src="assets/cory-dna-strand-flying.png" alt="Team member exploring system architecture" width="220"/>
+</div>
+
 ## Configuration Defaults
 
 ### Context Window: 32768 tokens
@@ -302,6 +306,10 @@ These commands and configurations work on Windows 11 24H2 systems with 32GB RAM,
 **English:** Commands, errors, documentation assume English system locale. Localization may vary.
 
 ---
+
+<div align="center">
+<img src="assets/cory-force-user.png" alt="Team member demonstrating expert mastery" width="200"/>
+</div>
 
 ## For Future Maintainers
 
