@@ -1,73 +1,113 @@
 <div align="center">
 
-# Windows 11 Local Coding Setup
+<img src="assets/CoryLabScene-Small.png" alt="Local AI Workspace" width="800"/>
 
-### 32GB RAM · LM Studio + opencode
+# Local AI Coding on Windows 11
+
+### Professional Skill-Building: LM Studio + opencode
 
 <div style="margin: 20px 0;">
-  <img src="https://img.shields.io/badge/OS-Windows%2011%2024H2-blue?style=for-the-badge&logo=windows" alt="Windows 11" />
-  <img src="https://img.shields.io/badge/Engine-opencode-purple?style=for-the-badge" alt="opencode" />
+  <img src="https://img.shields.io/badge/OS-Windows%2011-0078D4?style=for-the-badge&logo=windows11" alt="Windows 11" />
+  <img src="https://img.shields.io/badge/RAM-32GB_Focus-00ADD8?style=for-the-badge" alt="32GB" />
+  <img src="https://img.shields.io/badge/Engine-LM_Studio-7C3AED?style=for-the-badge" alt="LM Studio" />
 </div>
 
-**CLI-first local LLM orchestration for 32GB RAM systems.**  
-Run a 35B model locally on your rig with LM Studio and opencode.
+**Add local AI coding to your professional toolkit.**  
+Generate PowerShell scripts, troubleshoot systems, document infrastructure—all without sending data to the cloud.
 
 </div>
 
 ---
 
-## 🎯 Meta-Objectives
+## Why This Matters
 
-| Objective | Detail |
-|:---|:---|
-| **Enable Local Coding** | LM Studio + opencode for single-model inference |
-| **GPU-Accelerated Inference** | Hardware-accelerated inference via LM Studio |
-| **Single-Active-Model** | Only one model resident in memory at a time |
-| **CLI-First** | All setup via Windows Terminal — no GUI required |
+You're an IT professional—support, network, infrastructure, maybe development. You have deep expertise in your domain. This guide helps you add a new capability: running powerful AI models locally for daily work. Generate automation scripts, troubleshoot error messages, write documentation. Practical tasks that justify the setup time.
+
+**What makes this different:** No cloud dependencies, no data leaving your organization, no monthly subscriptions. Your hardware, your models, your data.
 
 ---
 
-## 🏗 Architecture
+## What You'll Run
+
+**LM Studio** handles model discovery, download, and serving. Intuitive CLI, robust functionality, chat GUI with tool calling.
+
+**opencode** provides the coding workflow. Connect it to LM Studio's served models and you have a complete local AI coding environment.
+
+**Target configuration:** 32GB RAM systems (Ryzen AI, Intel Lunar Lake) running Qwen 3.6 35B or similar models via Vulkan.
+
+> **16GB systems:** See sidebars throughout the documentation for 9B model alternatives that work within tighter memory constraints.
+
+---
+
+## 🏗 How It Fits Together
 
 ```mermaid
 graph LR
-    A[User] -->|opencode CLI| B[opencode.json]
-    B -->|Architect Mode| C[LM Studio Model]
-    C -->|unload| D[Memory Manager]
-    D -->|load| C
-    C -->|GPU| E[Hardware]
-    style C fill:#4A90E2,color:#fff
-    style D fill:#2C3E50,color:#fff
-    style E fill:#E74C3C,color:#fff
+    A[You] -->|Commands| B[opencode]
+    B -->|API Calls| C[LM Studio Server]
+    C -->|Loads & Runs| D[AI Model]
+    D -->|Responses| B
+    style B fill:#7C3AED,color:#fff
+    style C fill:#0078D4,color:#fff
+    style D fill:#00ADD8,color:#fff
 ```
 
-**Key Constraints:**
-- **Single Active Model**: Only one model resident in memory at a time
-- **32k Context / 1 Concurrency**: Required for 32GB RAM stability
+**Key constraints for 32GB:**
+- **Context:** 32,768 tokens
+- **Concurrency:** 1 request at a time  
+- **Single model:** Unload before loading another (RAM physics, not ceremony)
+
+These are tested defaults that keep everything stable when running other software alongside your AI tools.
 
 ---
 
-## 📁 Documentation Structure
+## 📚 Documentation Structure
 
-| File | Purpose |
+| Document | When to Read |
 |:---|:---|
-| [`QUICKSTART.md`](QUICKSTART.md) | Step-by-step CLI setup guide |
-| [`SETUP.md`](SETUP.md) | LM Studio Daemon setup and model configuration |
-| [`CONFIG.md`](CONFIG.md) | `opencode.json` schema & lifecycle |
-| [`NOTES.md`](NOTES.md) | Design rationale & authoritative references |
+| **[QUICKSTART](QUICKSTART.md)** | Start here. Zero to running model in minimal steps. |
+| **[SETUP](SETUP.md)** | After QUICKSTART works and you want to understand what you built. |
+| **[CONFIG](CONFIG.md)** | When customizing model settings or switching between models. |
+| **[NOTES](NOTES.md)** | For design rationale, hardware recommendations, troubleshooting. |
+| **[Use Cases](USE_CASES.md)** | See it in action: PowerShell generation and error troubleshooting. |
 
 ---
 
-## ⚡ Quick Links
+## ⚡ Quick Start
 
-- [Start Setup](QUICKSTART.md) — Get running in 5 minutes
-- [Configure opencode](CONFIG.md) — Memory policy & model definitions
-- [Technical Notes](NOTES.md) — Context limits, concurrency, and constraints
+Ready to try it? Three commands to get running:
+
+```powershell
+# Install LM Studio
+winget install ElementLabs.LMStudio --accept-package-agreements --accept-source-agreements
+
+# Download and start (see QUICKSTART.md for full details)
+lms get <model-name>
+lms load <model-name> --context-length 32768 --parallel-requests 1
+```
+
+Then follow [QUICKSTART.md](QUICKSTART.md) for the complete setup sequence.
+
+---
+
+## Who This Serves
+
+**Primary:** Field IT Pros learning to add AI coding to their toolkit. You might not have touched git or developer workflows before—that's fine. We explain what matters without assuming developer background.
+
+**Also useful for:** Developers (who already know opencode), Infrastructure Architects, Software Architects, Specialists/SMEs, IT Team Managers.
+
+If you're a professional looking to expand your capabilities with practical AI tools, this documentation is for you.
 
 ---
 
 <div align="center">
 
-*Optimize. Iterate. Deploy.*
+**[Start Setup →](QUICKSTART.md)**
+
+*Local models. Local data. Your expertise, amplified.*
+
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="120"/>
 
 </div>

@@ -1,112 +1,188 @@
-# QUICKSTART — CLI Setup Guide
+# QUICKSTART: Get Running Fast
 
-Get your 32GB system running with LM Studio + opencode for local inference. All commands execute in **Windows Terminal**.
+**Goal:** Get LM Studio serving a model and opencode connected in under 10 minutes.
 
-> **Scope**: This guide covers LM Studio + opencode only. Ollama steps are deferred.
+**For:** 32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
+
+> **16GB users:** Use a 9B model instead of 35B. See sidebars for specific alternatives.
+
+All commands run in **Windows Terminal** (PowerShell).
 
 ---
 
-## 1. Install LM Studio
+## Prerequisites
+
+- Windows 11 (recent build, 24H2 or later recommended)
+- 32GB RAM
+- Updated GPU drivers (Ryzen AI / Intel Lunar Lake / compatible)
+- Administrator access for winget installation
+
+---
+
+## Step 1: Install LM Studio
 
 ```powershell
 winget install ElementLabs.LMStudio --accept-package-agreements --accept-source-agreements
 ```
 
-**Checkpoint**: Verify installation.
+**Verify installation:**
 
 ```powershell
 lms --version
 ```
 
----
+**Expected:** Version string displays. If command not found, restart terminal or add LM Studio to PATH.
 
-## 2. Start LM Studio Daemon
-
-```powershell
-lms start
-```
-
-**Checkpoint**: Confirm daemon is running.
-
-```powershell
-lms list
-```
-
-Expected: empty model list (no models loaded yet).
+> **Note:** The `lms` command-line interface provides all model management. The GUI is available but not required for this setup.
 
 ---
 
-## 3. Download Architect Model
+## Step 2: Start the LM Studio Server
 
 ```powershell
-lms get Qwen/Qwen3.6-35B-Instruct-GGUF --quant q4_k_m
+lms server start
 ```
 
-**Checkpoint**: Verify model downloaded.
+**Verify server running:**
 
 ```powershell
-lms list
+lms server status
 ```
 
-Expected: architect model in the list.
+**Expected:** Server running, listening on a port (typically 1234).
+
+> **Troubleshooting:** If port conflict occurs, LM Studio docs show how to configure alternate ports.
 
 ---
 
-## 4. Load Architect Model with Constraints
+## Step 3: Download the Model
+
+For 32GB systems, we recommend Qwen 3.6 35B with MoE architecture and optimized quantization:
 
 ```powershell
-lms load Qwen/Qwen3.6-35B-Instruct-GGUF --context-length 32768 --parallel-requests 1
+lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m
 ```
 
-**Checkpoint**: Verify model loaded.
+> **Verification note:** The exact model identifier may vary. Check available models with `lms search qwen`. Use the Qwen 3.6 35B variant with q4_k_m quantization.
 
-```powershell
-lms list
-```
+> **16GB sidebar:** For 16GB systems, use a 9B model instead:  
+> `lms get qwen/qwen-2.5-9b-instruct-gguf --quant q4_k_m`
 
-Expected: architect model showing `loaded` status.
+**Download takes time.** The model is ~18-20GB. Progress displays in terminal.
 
 ---
 
-## 5. Run opencode in Architect Mode
+## Step 4: Load Model with Stability Settings
 
 ```powershell
-opencode --model architect
+lms load qwen/qwen-3.6-35b-instruct-gguf --context-length 32768 --max-parallel 1
 ```
 
-**Checkpoint**: Confirm opencode connects to LM Studio and loads the model.
+**Why these settings:**
+- `--context-length 32768`: Tested context window size that works reliably on 32GB with other applications running
+- `--max-parallel 1`: Single request at a time prevents memory contention
+
+**Verify model loaded:**
+
+```powershell
+lms ps
+```
+
+**Expected:** One model showing "loaded" status. Memory usage visible.
+
+> **16GB sidebar:** Same command, just reference the 9B model name instead.
 
 ---
 
-## 6. Verify Single-Active-Model State
+## Step 5: Install opencode
 
 ```powershell
-opencode status
+# Verify you have node/npm first
+node --version
+
+# Install opencode globally
+npm install -g @anthropic-ai/opencode
 ```
 
-**Checkpoint**: Confirm only one model is resident. No build model should be loaded.
+> **Don't have Node.js?** Download from [nodejs.org](https://nodejs.org/) (LTS version recommended).
+
+> **Developer note:** If you already have opencode installed, verify version is current: `opencode --version`
+
+**Verify installation:**
+
+```powershell
+opencode --version
+```
 
 ---
 
-## 7. Switch to Build Mode (When Needed)
+## Step 6: Connect opencode to LM Studio
 
-```powershell
-lms unload --all
-opencode --model build
+Create `opencode.json` in your project directory (or use global config):
+
+```json
+{
+  "engine": {
+    "provider": "lmstudio",
+    "endpoint": "http://localhost:1234",
+    "context_window": 32768,
+    "max_parallel": 1
+  }
+}
 ```
 
-**Checkpoint**: Confirm build model is loaded and architect model is unloaded.
+> **Configuration note:** These keys match opencode's documented schema. For full schema, see CONFIG.md.
+
+**Test the connection:**
+
+```powershell
+opencode "write a hello world PowerShell script"
+```
+
+**Expected:** opencode connects to LM Studio, sends request, returns generated script.
+
+**Success looks like:** Model responds with PowerShell code. Response time varies (10-30 seconds typical for first request).
 
 ---
 
-## ⚠️ Ollama Placeholder
+## Step 7: Verify Single-Model Setup
 
-> Ollama steps are deferred to a future iteration. Do not attempt to orchestrate Ollama in this release. This section will be populated when Ollama support is re-evaluated.
+```powershell
+lms ps
+```
+
+**Confirm:** Only one model shows "loaded" status. This is important for 32GB stability.
+
+**Why it matters:** Loading multiple large models simultaneously exhausts RAM and causes system paging. Single-model operation keeps inference fast and stable.
+
+---
+
+## Next Steps
+
+**It works?** Great. Now:
+
+1. **Understand what you built:** Read [SETUP.md](SETUP.md) for how LM Studio + opencode work together
+2. **See it in action:** Check [USE_CASES.md](USE_CASES.md) for PowerShell generation and troubleshooting examples  
+3. **Customize:** Read [CONFIG.md](CONFIG.md) when you want to tune settings or switch models
+
+**Having issues?** See [NOTES.md](NOTES.md) troubleshooting section for common problems and solutions.
+
+---
+
+## Ollama (Future)
+
+Ollama integration is planned but not documented yet. Focus on LM Studio for now—it's tested and works reliably for this configuration. Ollama guidance will be added when we can provide the same quality of verified instructions.
 
 ---
 
 <div align="center">
 
-*You're set. Head to [SETUP.md](SETUP.md) for environment preparation or [CONFIG.md](CONFIG.md) for opencode configuration.*
+**You're set up. Time to put it to work.**
+
+[See Use Cases →](USE_CASES.md) | [Understand the Setup →](SETUP.md)
+
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
 
 </div>

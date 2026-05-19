@@ -1,32 +1,25 @@
-# CONFIG — opencode.json Specification
+# CONFIG: opencode Configuration Reference
 
-This document defines the `opencode.json` schema for orchestrating the Architect model on 32GB RAM systems.
+This document defines the `opencode.json` configuration for local AI coding with LM Studio.
+
+**When to use this:** After QUICKSTART works and you want to customize model settings, switch models, or understand configuration options.
 
 ---
 
-## 1. Minimal Configuration
+## Minimal Working Configuration
 
 Copy this into your project root as `opencode.json`:
 
 ```json
 {
   "engine": {
-    "concurrency": 1,
-    "context_window": 32768
+    "provider": "lmstudio",
+    "endpoint": "http://localhost:1234",
+    "context_window": 32768,
+    "max_parallel": 1
   },
   "models": {
-    "architect": {
-      "id": "Qwen/Qwen3.6-35B-Instruct-GGUF",
-      "quantization": "q4_k_m",
-      "backend": "lms",
-      "description": "Deep reasoning & planning — parameter-rich architecture mode"
-    },
-    "build": {
-      "id": "lmstudio-community/gemma-4b-instruct-q4_k_m.gguf",
-      "quantization": "q4_k_m",
-      "backend": "lms",
-      "description": "Fast code assistance — lightweight build mode model"
-    }
+    "default": "qwen-3.6-35b-instruct"
   },
   "logging": {
     "level": "info",
@@ -35,68 +28,273 @@ Copy this into your project root as `opencode.json`:
 }
 ```
 
+**This configuration:**
+- Points opencode at your local LM Studio server
+- Sets 32GB-safe memory limits  
+- Specifies which model to use
+- Enables basic logging
+
+> **Copy-paste ready:** This should work as-is. If you get errors, verify model name matches what's loaded in LM Studio (`lms ps`).
+
 ---
 
-## 2. Schema Reference
+## Schema Reference
 
-### `engine` — Inference Controls
+### `engine` Section
 
-| Key | Type | Default | Required | Description |
-|:---|:---|:---|:---|:---|
-| `concurrency` | int | `1` | Yes | Max parallel inference threads |
-| `context_window` | int | `32768` | Yes | Token context length limit |
+Controls how opencode connects to the AI model.
 
-### `models` — Model Definitions
+| Key | Type | Required | Description |
+|:---|:---|:---|:---|
+| `provider` | string | Yes | Set to `"lmstudio"` for local LM Studio server |
+| `endpoint` | string | Yes | LM Studio API URL (default: `http://localhost:1234`) |
+| `context_window` | integer | Yes | Token context limit (recommend `32768` for 32GB RAM) |
+| `max_parallel` | integer | Yes | Concurrent requests (set `1` for single-model stability) |
+
+**Why these matter:**
+
+- **provider:** Tells opencode you're using LM Studio (not OpenAI, Anthropic, etc.)
+- **endpoint:** Where to send API requests. Update if you configured LM Studio on different port.
+- **context_window:** Maximum tokens in a request. Must match or be less than what you used when loading model in LM Studio. Higher values use more RAM.
+- **max_parallel:** How many requests simultaneously. For 32GB with large model, `1` prevents memory contention.
+
+> **Don't exceed your model's capabilities:** If you loaded model with `--context-length 32768`, don't set context_window higher than 32768 in opencode config.
+
+### `models` Section
+
+Defines which model(s) are available.
 
 | Key | Type | Description |
 |:---|:---|:---|
-| `architect.id` | string | LM Studio model identifier |
-| `architect.quantization` | string | Quantization string (e.g., `q4_k_m`) |
-| `architect.backend` | string | Inference engine (`lms`) |
-| `architect.description` | string | Human-readable description |
-| `build.id` | string | LM Studio model identifier |
-| `build.quantization` | string | Quantization string (e.g., `q4_k_m`) |
-| `build.backend` | string | Inference engine (`lms`) |
-| `build.description` | string | Human-readable description |
+| `default` | string | Model name to use by default |
+| `[custom-name]` | object | Additional model definitions (optional) |
 
----
-
-## 3. Lifecycle — Unload/Load Sequence
-
-Execute this sequence when switching models:
-
-```powershell
-# 1. Unload current model
-lms unload --all
-
-# 2. Wait for VRAM flush (2-3 seconds)
-Start-Sleep -Seconds 3
-
-# 3. Load new model with constraints
-lms load Qwen/Qwen3.6-35B-Instruct-GGUF --context-length 32768 --parallel-requests 1
-
-# 4. Verify single model state
-opencode status
+**Simple configuration (recommended):**
+```json
+{
+  "models": {
+    "default": "qwen-3.6-35b-instruct"
+  }
+}
 ```
 
-**Expected after step 4**: Only the new model is resident. No secondary models loaded.
+**Model name:** Should match the name shown in `lms ps`. If unsure, run `lms ps` and copy the model identifier from the output.
+
+**Multiple models (advanced):**
+
+If you want to switch between models:
+
+```json
+{
+  "models": {
+    "default": "qwen-3.6-35b-instruct",
+    "lightweight": {
+      "name": "qwen-2.5-9b-instruct",
+      "description": "Faster, lower memory option"
+    }
+  }
+}
+```
+
+Then use: `opencode --model lightweight "your request"`
+
+**Remember:** With 32GB RAM, only load one model at a time in LM Studio. The config can list multiple options, but you manually switch which is loaded.
+
+### `logging` Section
+
+Optional logging configuration.
+
+| Key | Type | Description |
+|:---|:---|:---|
+| `level` | string | Log verbosity: `"error"`, `"warn"`, `"info"`, `"debug"` |
+| `log_path` | string | Where to write logs (relative or absolute path) |
+
+**Recommended for troubleshooting:**
+```json
+{
+  "logging": {
+    "level": "info",
+    "log_path": "./logs/opencode.log"
+  }
+}
+```
+
+**Log levels:**
+- `error`: Only errors (minimal)
+- `info`: Errors + request/response summaries (recommended)
+- `debug`: Everything (verbose, useful for troubleshooting)
 
 ---
 
-## 4. Definition of Done
+## Model Switching Workflow
 
-Verify completion with this checklist:
+When you want to switch models, you need to coordinate between LM Studio and opencode:
 
-- [ ] Architect model downloads successfully via `lms get`
-- [ ] Architect model loads with context=32768, concurrency=1
-- [ ] `opencode status` shows architect model loaded
-- [ ] `opencode status` shows no secondary models
-- [ ] `lms list` confirms only one model in `loaded` state
+### Step 1: Unload Current Model (LM Studio)
+
+```powershell
+lms unload --all
+```
+
+**Wait a moment** for memory to be released (2-3 seconds).
+
+### Step 2: Load New Model (LM Studio)
+
+```powershell
+lms load <new-model-name> --context-length 32768 --max-parallel 1
+```
+
+**Verify load:**
+```powershell
+lms ps
+# Expected: New model showing "loaded", old model gone
+```
+
+### Step 3: Update Configuration (opencode)
+
+If using simple config, update the model name:
+
+```json
+{
+  "models": {
+    "default": "new-model-name"
+  }
+}
+```
+
+Or use the `--model` flag if you have multiple defined:
+```powershell
+opencode --model lightweight "your request"
+```
+
+### Step 4: Verify Switch
+
+```powershell
+opencode "test with simple request"
+```
+
+**Expected:** Response from new model (behavior may differ based on model size/training).
+
+---
+
+## Model Recommendations
+
+### For 32GB Systems (Primary)
+
+**Qwen 3.6 35B** (q4_k_m quantization)
+- Strong reasoning and planning capability
+- MoE architecture for efficiency
+- Excellent code generation
+- ~18-20GB RAM footprint
+
+**Model identifier to check:**  
+```powershell
+lms search "qwen 3.6 35b"
+# Look for: qwen/qwen-3.6-35b-instruct-gguf
+```
+
+### For 16GB Systems (Alternative)
+
+**Qwen 2.5 9B** (q4_k_m quantization)
+- Good code generation in smaller package
+- ~5-6GB RAM footprint
+- Leaves room for OS and other applications
+
+**Gemma 9B** (alternative)
+- Fast inference
+- Good for script generation and quick tasks
+- ~5-6GB RAM footprint
+
+> **16GB constraint:** System needs room for OS, browser, tools. 9B models leave adequate headroom. 13B+ models risk memory pressure.
+
+---
+
+## Configuration Don'ts
+
+**Don't invent keys.** opencode has a specific schema. If a key isn't documented (either here or in official opencode docs), it won't work. Reality over wishful thinking.
+
+**Don't guess model names.** Use `lms ps` or `lms search` to find exact identifiers. Typos in model names cause connection failures.
+
+**Don't exceed memory limits.** If you set `context_window: 65536` on a 32GB system with 35B model, expect crashes or paging. Respect the tested defaults.
+
+**Don't skip the unload step.** When switching models, always unload first. Loading a second large model exhausts RAM.
+
+---
+
+## Verification Checklist
+
+After configuration changes:
+
+- [ ] `opencode --help` runs without error (config parse successful)
+- [ ] `lms ps` shows model matching your config
+- [ ] Test request completes: `opencode "write hello world in PowerShell"`
+- [ ] Logs appear if you enabled logging (check log_path)
+- [ ] `lms ps` still shows only one model (no extras leaked in)
+
+**All checked?** Your configuration is working.
+
+---
+
+## Common Configuration Issues
+
+**"Cannot connect to endpoint":**
+- Verify LM Studio server running: `lms server status`
+- Check endpoint URL matches server port
+- Test with curl: `curl http://localhost:1234/v1/models`
+
+**"Model not found":**
+- Run `lms ps` and verify model name exactly matches config
+- Model names are case-sensitive
+- Check for typos
+
+**Slow responses:**
+- Verify `max_parallel: 1` in config
+- Check `lms ps` for multiple loaded models (should be one)
+- Reduce `context_window` if requests are very long
+
+**Configuration not taking effect:**
+- opencode reads config on startup—restart your terminal
+- Check for syntax errors in JSON (use JSONlint or similar)
+- Verify file is named exactly `opencode.json` (no `.txt` extension)
+
+---
+
+## Advanced: Multiple Environments
+
+If you work on different projects with different model requirements:
+
+**Option 1: Project-local configs**
+
+Create `opencode.json` in each project directory:
+```
+project-a/
+  opencode.json  (uses 35B model)
+  
+project-b/
+  opencode.json  (uses 9B model)
+```
+
+opencode reads the local config when you run commands in that directory.
+
+**Option 2: Profile flags**
+
+Some opencode versions support `--config` flag:
+```powershell
+opencode --config ./configs/heavy-model.json "request"
+```
+
+Check `opencode --help` to see if your version supports this.
 
 ---
 
 <div align="center">
 
-*Need the technical rationale? Head to [NOTES.md](NOTES.md) for authoritative documentation.*
+**Want deeper technical rationale?** See [NOTES.md](NOTES.md) for design decisions and authoritative references.
+
+**Ready to see it in action?** Check [USE_CASES.md](USE_CASES.md) for practical examples.
+
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
 
 </div>
