@@ -432,4 +432,8 @@ See [SETUP.md](SETUP.md) and [CONFIG.md](CONFIG.md) for customization.
 
 Read [NOTES.md](NOTES.md) for technical details and troubleshooting.
 
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+
 </div>

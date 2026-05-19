@@ -181,4 +181,8 @@ Ollama integration is planned but not documented yet. Focus on LM Studio for now
 
 [See Use Cases →](USE_CASES.md) | [Understand the Setup →](SETUP.md)
 
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+
 </div>

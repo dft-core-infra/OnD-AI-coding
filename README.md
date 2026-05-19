@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/CoryLabScene-Small.png" alt="Local AI Workspace" width="800"/>
+
 # Local AI Coding on Windows 11
 
 ### Professional Skill-Building: LM Studio + opencode
@@ -103,5 +105,9 @@ If you're a professional looking to expand your capabilities with practical AI t
 **[Start Setup →](QUICKSTART.md)**
 
 *Local models. Local data. Your expertise, amplified.*
+
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="120"/>
 
 </div>

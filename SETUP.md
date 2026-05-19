@@ -277,10 +277,34 @@ If responses feel slow:
 
 ---
 
+## Monitoring GPU Usage
+
+When inference is running, monitor system resources to verify healthy operation:
+
+<div align="center">
+<img src="assets/Screenshot 2026-05-16 190313.png" alt="Task Manager GPU monitoring during inference" width="700"/>
+
+*Example: Task Manager showing GPU utilization and memory usage during model inference*
+</div>
+
+**What to look for:**
+- **GPU utilization:** Should show activity during inference (percentage varies by request complexity)
+- **Memory usage:** High RAM usage is normal (~18-20GB for 35B model, ~29-31GB system total)
+- **Temperature:** Should remain within safe range (typically under 80°C for sustained load)
+- **Dedicated vs Shared memory:** On integrated graphics systems, watch shared memory allocation
+
+> **Note:** Screenshot shows NVIDIA discrete GPU; your Ryzen AI or Intel Lunar Lake system will show integrated GPU instead. Monitoring principles remain the same.
+
+---
+
 <div align="center">
 
 **Ready to customize?** See [CONFIG.md](CONFIG.md) for detailed configuration options.
 
 **Want to understand the design?** Read [NOTES.md](NOTES.md) for rationale and references.
+
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
 
 </div>

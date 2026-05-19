@@ -354,4 +354,8 @@ These commands and configurations work on Windows 11 24H2 systems with 32GB RAM,
 
 **Back to basics:** [QUICKSTART.md](QUICKSTART.md) | [SETUP.md](SETUP.md) | [CONFIG.md](CONFIG.md)
 
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+
 </div>

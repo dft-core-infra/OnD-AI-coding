@@ -293,4 +293,8 @@ Check `opencode --help` to see if your version supports this.
 
 **Ready to see it in action?** Check [USE_CASES.md](USE_CASES.md) for practical examples.
 
+---
+
+<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+
 </div>
