@@ -109,6 +109,10 @@ try {
 
 ## Use Case 2: Troubleshoot Windows Error Message
 
+<div align="center">
+<img src="assets/AI Cory - Concerned.png" alt="Team member troubleshooting technical issue" width="220"/>
+</div>
+
 **Scenario:** You're getting Event ID 7001 in Event Viewer. System logs show "The Dependency Service or Group Failed to Start." Service won't start, users can't access a critical application.
 
 ### The Request
@@ -203,6 +207,14 @@ PREVENTION:
 **Local knowledge:** Error messages can contain system names, IP addresses, internal paths. With local processing, that data doesn't leave your machine.
 
 **Learning:** Next time you see similar dependency failures, you recognize the pattern faster.
+
+---
+
+<div align="center">
+<img src="assets/cora_coffe_1.png" alt="Team member taking coffee break" width="200"/>
+
+*Take a moment before the next example*
+</div>
 
 ---
 
@@ -423,6 +435,8 @@ Try: "Create PowerShell backup script for Windows Server 2022 that backs up C:\D
 ---
 
 <div align="center">
+
+<img src="assets/AIN Green Stream - Survey Thanks.jpg" alt="Team celebration - Good job completing setup" width="800"/>
 
 **Ready to try these yourself?**
 

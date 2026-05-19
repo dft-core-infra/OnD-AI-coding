@@ -75,6 +75,8 @@ These are tested defaults that keep everything stable when running other softwar
 
 ## ⚡ Quick Start
 
+<img src="assets/Droid.png" alt="Automation assistant icon" width="80" align="right"/>
+
 Ready to try it? Three commands to get running:
 
 ```powershell
@@ -101,6 +103,8 @@ If you're a professional looking to expand your capabilities with practical AI t
 ---
 
 <div align="center">
+
+<img src="assets/AIN Green Stream - Survey Thanks.jpg" alt="Team celebration - Good job! Ready to begin" width="800"/>
 
 **[Start Setup →](QUICKSTART.md)**
 

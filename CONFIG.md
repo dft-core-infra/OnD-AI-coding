@@ -6,6 +6,10 @@ This document defines the `opencode.json` configuration for local AI coding with
 
 ---
 
+<div align="center">
+<img src="assets/Droid.png" alt="Automation assistant icon" width="120"/>
+</div>
+
 ## Minimal Working Configuration
 
 Copy this into your project root as `opencode.json`:
@@ -209,6 +213,12 @@ lms search "qwen 3.6 35b"
 
 ---
 
+<div align="center">
+<img src="assets/AI Cory - Concerned.png" alt="Team member troubleshooting technical issue" width="180"/>
+
+*Common mistakes ahead - read carefully*
+</div>
+
 ## Configuration Don'ts
 
 **Don't invent keys.** opencode has a specific schema. If a key isn't documented (either here or in official opencode docs), it won't work. Reality over wishful thinking.
@@ -258,6 +268,10 @@ After configuration changes:
 - Verify file is named exactly `opencode.json` (no `.txt` extension)
 
 ---
+
+<div align="center">
+<img src="assets/cory-force-user.png" alt="Team member demonstrating expert mastery" width="200"/>
+</div>
 
 ## Advanced: Multiple Environments
 
