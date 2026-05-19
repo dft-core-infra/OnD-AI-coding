@@ -63,11 +63,22 @@ Each major caveat gets three narrative blocks (all with real value, no fluff):
 - Acknowledge real-world experiences will feed in and refine over time
 - Document evolves as usage patterns emerge
 
-**Tone Notes:**
+**Tone & Expansion Guidance:**
 - This is about tuning expectations, not discouraging
 - Honest advocacy: acknowledge real benefits while being clear about costs/tradeoffs
 - Help readers make informed decisions about whether local AI coding investment makes sense for their situation
-- Grounded in concrete technical realities, not speculation or fluffy AI text
+- **Grounded in concrete technical realities, not speculation or fluffy AI text**
+- **"Explode" from the concrete technical points** - elaborate and expand from known facts without reverting to low-quality filler
+- Don't limit to only what architect knows, but also don't speculate beyond established knowledge
+- Each of the three narrative blocks must have **real value, not just filling feel**
+- Focus on **well-known top-value use cases for AI coding** (code generation, debugging, refactoring, etc.) - not technology-specific examples like PowerShell
+- Research needed for aspects where architect is not authoritative (multi-file reasoning, complex refactoring details, API usage patterns)
+
+**Content Development Notes:**
+- Lead with use cases where debunking/expectation calibration most needed
+- Integrate debunking bubbles naturally, not as separate forced section
+- Flow should be logical and non-repeating
+- Each caveat gets full three-perspective treatment with substance
 
 **Powerpoint Mask Integration:**
 - **Asset:** `assets/Powerpoint Mask.png` (859×312px, 2.75:1 aspect ratio)
