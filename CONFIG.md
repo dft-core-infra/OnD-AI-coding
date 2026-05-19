@@ -309,6 +309,6 @@ Check `opencode --help` to see if your version supports this.
 
 ---
 
-<img src="assets/gen_b9cef0ae117741a2a76fa8630fcea844.png" alt="Team" width="80"/> <img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+<img src="assets/DIGITAL_Foundations_logo.png" alt="Team One Digital Foundations" height="100" style="vertical-align: middle;"/> <img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" height="100" style="vertical-align: middle;"/>
 
 </div>
