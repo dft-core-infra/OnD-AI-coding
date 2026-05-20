@@ -189,7 +189,7 @@ PREVENTION:
 - Regular driver updates from manufacturer (not Windows Update generic)
 - Monitor spool folder size (large stuck jobs cause issues)
 - Periodic spooler restarts during maintenance windows
-```
+
 
 ### What You Do Next
 
