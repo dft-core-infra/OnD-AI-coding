@@ -39,6 +39,8 @@ QUICKSTART got you running. This document explains how the pieces work together,
 
 ## The LM Studio Server
 
+<img src="assets/Droid.png" alt="Server automation" width="80" align="right"/>
+
 ### Starting and Stopping
 
 ```powershell
@@ -59,6 +61,10 @@ lms server stop
 ---
 
 ## Model Management
+
+<div align="center">
+<img src="assets/CORY PC Cat.png" alt="IT infrastructure specialist" width="200"/>
+</div>
 
 ### Searching for Models
 
@@ -176,6 +182,8 @@ Create `opencode.json` in your working directory or home directory:
 </div>
 
 ## Verification Checklist
+
+<img src="assets/cory-police.png" alt="Security verification officer" width="180" align="right"/>
 
 **After setup, verify:**
 
@@ -319,6 +327,6 @@ When inference is running, monitor system resources to verify healthy operation:
 
 ---
 
-<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+<img src="assets/DIGITAL_Foundations_logo.png" alt="Team One Digital Foundations" height="100" style="vertical-align: middle;"/> <img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" height="100" style="vertical-align: middle;"/>
 
 </div>

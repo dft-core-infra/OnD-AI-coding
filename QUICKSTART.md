@@ -6,9 +6,9 @@
 
 **Goal:** Get LM Studio serving a model and opencode connected in under 10 minutes.
 
-**For:** 32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
+**For:** 16GB/32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
 
-> **16GB users:** Use a 9B model instead of 35B. See sidebars for specific alternatives.
+> **16GB users:** May work on a case-by-case basis (HW limitations). Please pay attention to the info in the sidebars.
 
 All commands run in **Windows Terminal** (PowerShell).
 
@@ -17,7 +17,7 @@ All commands run in **Windows Terminal** (PowerShell).
 ## Prerequisites
 
 - Windows 11 (recent build, 24H2 or later recommended)
-- 32GB RAM
+- 32GB RAM (16GB RAM supported with limitations, check sidebars)
 - Updated GPU drivers (Ryzen AI / Intel Lunar Lake / compatible)
 - Administrator access for winget installation
 
@@ -157,6 +157,8 @@ opencode "write a hello world PowerShell script"
 
 ## Step 7: Verify Single-Model Setup
 
+<img src="assets/cory-police.png" alt="Security verification" width="150" align="right"/>
+
 ```powershell
 lms ps
 ```
@@ -174,6 +176,7 @@ lms ps
 1. **Understand what you built:** Read [SETUP.md](SETUP.md) for how LM Studio + opencode work together
 2. **See it in action:** Check [USE_CASES.md](USE_CASES.md) for PowerShell generation and troubleshooting examples  
 3. **Customize:** Read [CONFIG.md](CONFIG.md) when you want to tune settings or switch models
+4. **Reality check:** Read [CAVEATS.md](CAVEATS.md) for honest assessment of what you're getting—tradeoffs, costs, and limitations
 
 **Having issues?** See [NOTES.md](NOTES.md) troubleshooting section for common problems and solutions.
 
@@ -195,6 +198,6 @@ Ollama integration is planned but not documented yet. Focus on LM Studio for now
 
 ---
 
-<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+<img src="assets/DIGITAL_Foundations_logo.png" alt="Team One Digital Foundations" height="100" style="vertical-align: middle;"/> <img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" height="100" style="vertical-align: middle;"/>
 
 </div>

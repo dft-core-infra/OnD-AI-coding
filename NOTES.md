@@ -39,7 +39,7 @@ This document shows our work—why we made specific choices, what we tested, wha
 
 **Primary path:** Focus on 32GB Windows systems with 35B models (Qwen 3.6, Gemma 4). These are MoE architecture with lower quantization options and MTP optimizations.
 
-**Sidebar notes:** Throughout documentation, sidebars provide 16GB alternatives (9B models max, since systems need to run other software concurrently).
+> **Sidebar notes:** Throughout documentation, sidebars provide 16GB alternatives (9B models max, since systems need to run other software concurrently).
 
 **Rationale:** Keep main flow clean and optimized for target hardware while acknowledging most readers currently have 16GB systems. Both audiences find what they need without clutter.
 
@@ -360,10 +360,12 @@ These commands and configurations work on Windows 11 24H2 systems with 32GB RAM,
 
 **See it in action:** [USE_CASES.md](USE_CASES.md) for practical examples.
 
+**Reality check:** [CAVEATS.md](CAVEATS.md) for honest assessment of tradeoffs and limitations.
+
 **Back to basics:** [QUICKSTART.md](QUICKSTART.md) | [SETUP.md](SETUP.md) | [CONFIG.md](CONFIG.md)
 
 ---
 
-<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="100"/>
+<img src="assets/DIGITAL_Foundations_logo.png" alt="Team One Digital Foundations" height="100" style="vertical-align: middle;"/> <img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" height="100" style="vertical-align: middle;"/>
 
 </div>

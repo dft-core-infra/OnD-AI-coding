@@ -1,5 +1,95 @@
 # DOCUMENTATION PLAN: Windows 11 Local AI Coding Setup
 
+## TODO / Pending
+
+**CAVEATS.md - Reality Check:**
+- **Title:** "Reality Check"
+- **Purpose:** Responsibly set expectations about local AI for coding. Address enthusiasm around On-Device/Edge AI solving all AI problems while being honest about real tradeoffs, costs, and limitations.
+- **Status:** Requirements gathered, ready for drafting
+- **Context:** Cloud AI coding providers hitting users with restrictions, limits/caps, and cost increases. Coding is where it hit first. "The bubble may be about to burst." This drives interest in local solutions, but local AI requires significant hardware investment and has real capability tradeoffs.
+
+**Structure:**
+1. **Meaningful intro paragraph** - Frame the cloud AI market reality driving local interest, need for honest assessment
+2. **Lead with use cases** - Where expectations most need calibration, where misconceptions are common
+3. **Major caveat sections** in logical flow (see categories below)
+4. **Debunking bubbles** - Sidebars/callouts addressing misconceptions, not core narrative
+
+**Three-Perspective Approach:**
+Each major caveat gets three narrative blocks (all with real value, no fluff):
+1. **Neutral assessment** - "Here are the tradeoffs you're accepting"
+2. **Privacy/benefits perspective** - "Real limitations but worth it for privacy/control/no cloud costs"
+3. **Cautionary perspective** - "Know what you're getting into before investing"
+
+**Major Caveat Categories:**
+1. **Quantization quality tradeoffs**
+   - Below Q6 is yellow warning zone for coding specifically (OK/good for other use cases)
+   - Our recommended q4_k_m fits 35B in 32GB but makes quality compromises
+   - Degrades inference quality especially for structured outputs (tool calling, code generation)
+   - Q6 would be better for coding but won't fit 35B in 32GB
+   
+2. **Memory/hardware constraints**
+   - **Installed RAM is the main bottleneck** (not GPU/NPU compute)
+   - **Memory bandwidth** is the real limiting factor
+   - MoE (Mixture of Experts) mitigates compute and bandwidth bottlenecks but doesn't eliminate them
+   - MTP/Speculative Decoding helps speed but has memory cost
+   - Quantization allows larger models (more intrinsic knowledge) but inference quality is the price
+   - Practical limits depend on use case - can't quantize indefinitely
+   
+3. **Hardware cost reality**
+   - Enterprise and consumer-level AI-oriented hardware investment (laptops, workstations, edge AI hardware)
+   - Cost comparison vs. cloud subscription long-term
+   
+4. **Performance/speed expectations**
+   - Local inference speed vs. cloud model responsiveness
+   - Real-world latency for coding tasks
+   
+5. **Capability gaps vs. cloud models**
+   - What local 35B models can't do as well as GPT-4/Claude Opus
+   - Where the knowledge/reasoning gap shows up in coding work
+   
+6. **Context window limitations**
+   - 32k tokens (our conservative default) vs. cloud models with larger context
+   - Multi-file reasoning constraints
+   
+7. **Specific coding tasks that struggle**
+   - Complex refactoring, API usage, maintaining context across long conversations
+   - (Research needed - architect not authoritative on all aspects)
+   
+8. **Maintenance/update burden**
+   - Model updates, compatibility, ongoing management vs. cloud "just works"
+
+**Living Document:**
+- Set honest baseline with current knowledge
+- Acknowledge real-world experiences will feed in and refine over time
+- Document evolves as usage patterns emerge
+
+**Tone & Expansion Guidance:**
+- This is about tuning expectations, not discouraging
+- Honest advocacy: acknowledge real benefits while being clear about costs/tradeoffs
+- Help readers make informed decisions about whether local AI coding investment makes sense for their situation
+- **Grounded in concrete technical realities, not speculation or fluffy AI text**
+- **"Explode" from the concrete technical points** - elaborate and expand from known facts without reverting to low-quality filler
+- Don't limit to only what architect knows, but also don't speculate beyond established knowledge
+- Each of the three narrative blocks must have **real value, not just filling feel**
+- Focus on **well-known top-value use cases for AI coding** (code generation, debugging, refactoring, etc.) - not technology-specific examples like PowerShell
+- Research needed for aspects where architect is not authoritative (multi-file reasoning, complex refactoring details, API usage patterns)
+
+**Content Development Notes:**
+- Lead with use cases where debunking/expectation calibration most needed
+- Integrate debunking bubbles naturally, not as separate forced section
+- Flow should be logical and non-repeating
+- Each caveat gets full three-perspective treatment with substance
+
+**Powerpoint Mask Integration:**
+- **Asset:** `assets/Powerpoint Mask.png` (859×312px, 2.75:1 aspect ratio)
+- **Design:** White/gradient top transitioning to blue circuit board pattern bottom, RGBA with transparency
+- **Intent:** Use as semi-transparent background for text overlay in markdown
+- **Purpose:** "White on top/pattern on bottom good for semi transparent background for text"
+- **Status:** Deferred - need to identify best location and implementation approach that works gracefully in markdown
+- **Notes:** GitHub markdown has limited CSS/styling support; may need composite image or alternative approach
+
+---
+
 ## What This Is
 
 A recipe from zero to basics: how IT professionals add local AI coding capabilities to their toolkit using LM Studio + opencode on Windows 11. 

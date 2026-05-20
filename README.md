@@ -68,6 +68,7 @@ These are tested defaults that keep everything stable when running other softwar
 | **[QUICKSTART](QUICKSTART.md)** | Start here. Zero to running model in minimal steps. |
 | **[SETUP](SETUP.md)** | After QUICKSTART works and you want to understand what you built. |
 | **[CONFIG](CONFIG.md)** | When customizing model settings or switching between models. |
+| **[CAVEATS](CAVEATS.md)** | Reality check: honest assessment of tradeoffs, costs, and limitations. |
 | **[NOTES](NOTES.md)** | For design rationale, hardware recommendations, troubleshooting. |
 | **[Use Cases](USE_CASES.md)** | See it in action: PowerShell generation and error troubleshooting. |
 
@@ -77,18 +78,18 @@ These are tested defaults that keep everything stable when running other softwar
 
 <img src="assets/Droid.png" alt="Automation assistant icon" width="80" align="right"/>
 
-Ready to try it? Three commands to get running:
+Are you familiar with local AI setup already? Then you can use these three commands to get running:
 
 ```powershell
 # Install LM Studio
 winget install ElementLabs.LMStudio --accept-package-agreements --accept-source-agreements
 
-# Download and start (see QUICKSTART.md for full details)
+# Download and start
 lms get <model-name>
 lms load <model-name> --context-length 32768 --parallel-requests 1
 ```
 
-Then follow [QUICKSTART.md](QUICKSTART.md) for the complete setup sequence.
+DO you need step-by-step guidance? Then follow [QUICKSTART.md](QUICKSTART.md) for the complete setup sequence.
 
 ---
 
@@ -104,14 +105,12 @@ If you're a professional looking to expand your capabilities with practical AI t
 
 <div align="center">
 
-<img src="assets/AIN Green Stream - Survey Thanks.jpg" alt="Team celebration - Good job! Ready to begin" width="800"/>
-
 **[Start Setup →](QUICKSTART.md)**
 
 *Local models. Local data. Your expertise, amplified.*
 
 ---
 
-<img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" width="120"/>
+<img src="assets/DIGITAL_Foundations_logo.png" alt="Team One Digital Foundations" height="100" style="vertical-align: middle;"/> <img src="assets/DFT Logo - Full Fox - Orange.png" alt="Technology Core Infra" height="100" style="vertical-align: middle;"/>
 
 </div>
