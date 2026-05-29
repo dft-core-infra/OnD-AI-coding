@@ -1,84 +1,105 @@
 # This is the Reading List for the On-Device Coding Lab
 
 # Inference Engines
-    - Microsoft Foundry Local
-    https://learn.microsoft.com/en-us/azure/foundry-local/
+<p align="right">
+    <img src="assets/AI%20Cory%20-%20Concerned.png" alt="Inference engines illustration" width="110">
+</p>
 
-    - Llama CPP
-    https://github.com/ggml-org/llama.cpp
+- Microsoft Foundry Local<br>
+    [Foundry Local Documentation](https://learn.microsoft.com/en-us/azure/foundry-local/)
 
-    - Ollama
-    https://docs.ollama.com/quickstart
+- Llama CPP<br>
+    [llama.cpp - LLM Inference in C/C++](https://github.com/ggml-org/llama.cpp)
 
-    - vLLM
-    https://github.com/vllm-project/vllm
+- Ollama<br>
+    [Quickstart](https://docs.ollama.com/quickstart)
 
-    - LM Studio
-    https://lmstudio.ai/docs/developer/rest
+- vLLM<br>
+    [vLLM - Easy, Fast, and Cheap LLM Serving for Everyone](https://github.com/vllm-project/vllm)
 
-    - SGLang
-    https://docs.sglang.io/
+- LM Studio<br>
+    [LM Studio API](https://lmstudio.ai/docs/developer/rest)
 
-    - MLX (Apple Mac)
-    https://github.com/jjang-ai/vmlx
+- SGLang<br>
+    [Welcome to SGLang](https://docs.sglang.io/)
+
+- MLX (Apple Mac)<br>
+    [vMLX - MLX Inference Server for Apple Silicon](https://github.com/jjang-ai/vmlx)
 
 # Local Open-weights Models
-    - Alibaba Qwen 3.6
-    https://huggingface.co/Qwen
+<p align="right">
+    <img src="assets/CORY%20Socratic%202.png" alt="Open models illustration" width="110">
+</p>
 
-    - Google Gemma 4
-    https://deepmind.google/models/gemma/gemma-4/
+- Alibaba Qwen 3.6<br>
+    [Welcome to Qwen - Hugging Face](https://huggingface.co/Qwen)
 
-    - OpenAI GPT-OSS Family
-    https://openai.com/open-models/
+- Google Gemma 4<br>
+    [Gemma 4 - Open Models Built from Gemini 3 Research](https://deepmind.google/models/gemma/gemma-4/)
 
-    - Others - HuggingFace Models
-    https://huggingface.co/models
+- OpenAI GPT-OSS Family<br>
+    [Open Models by OpenAI](https://openai.com/open-models/)
+
+- Others - HuggingFace Models<br>
+    [Models - Hugging Face](https://huggingface.co/models)
 
 # Underlying AI Hardware
-    - NVIDIA CUDA
-    https://developer.nvidia.com/topics/ai/ai-inference
+<p align="right">
+    <img src="assets/CORY%20PC%20Cat.png" alt="AI hardware illustration" width="110">
+</p>
 
-    - AMD Ryzen AI
-    https://rocm.blogs.amd.com/artificial-intelligence/ryzen-uma-llm/README.html
+- NVIDIA CUDA<br>
+    [AI Inference - NVIDIA Developer](https://developer.nvidia.com/topics/ai/ai-inference)
 
-    - Intel VINO
-    https://docs.openvino.ai/2026/get-started/install-openvino/install-openvino-genai.html
+- AMD Ryzen AI<br>
+    [AI Inference on AMD Ryzen AI Max Processor](https://rocm.blogs.amd.com/artificial-intelligence/ryzen-uma-llm/README.html)
 
-    - Qualcomm NPU
-    https://www.qualcomm.com/developer/blog/2025/05/windows-copilot-runtime-on-qualcomm-npu
+- Intel VINO<br>
+    [Install OpenVINO GenAI](https://docs.openvino.ai/2026/get-started/install-openvino/install-openvino-genai.html)
 
-    - ONNX
-    https://onnxruntime.ai/docs/build/inferencing.html#windows
+- Qualcomm NPU<br>
+    [Windows AI Foundry and Windows ML on Qualcomm NPU](https://www.qualcomm.com/developer/blog/2025/05/windows-copilot-runtime-on-qualcomm-npu)
 
-    - Vulkan
-    https://orchestrator.dev/blog/2026-05-24-gpu-compute-platforms-comparison/
+- ONNX<br>
+    [Build ONNX Runtime for Inferencing](https://onnxruntime.ai/docs/build/inferencing.html#windows)
+
+- Vulkan<br>
+    [CUDA vs ROCm vs Vulkan vs Metal: GPU Compute in 2026](https://orchestrator.dev/blog/2026-05-24-gpu-compute-platforms-comparison/)
 
 # Coding / IDEs
-    - OpenCode
-    https://opencode.ai/docs/providers/
-    https://ai-sdk.dev/providers/openai-compatible-providers
+<p align="right">
+    <img src="assets/cory-force-user.png" alt="Coding tools illustration" width="110">
+</p>
 
-    - VS Code (and many clones)
-    https://code.visualstudio.com/docs/copilot/customization/language-models
+- OpenCode<br>
+    [Providers - Using Any LLM Provider in OpenCode](https://opencode.ai/docs/providers/)<br>
+    [OpenAI Compatible Providers - AI SDK](https://ai-sdk.dev/providers/openai-compatible-providers)
 
-    - Cline
-    https://cline.bot/cli
+- VS Code (and many clones)<br>
+    [AI Language Models in VS Code](https://code.visualstudio.com/docs/copilot/customization/language-models)
 
-    - Pi Coding Agent
-    https://pi.dev/docs/latest/providers#custom-providers    
+- Cline<br>
+    [Cline CLI](https://cline.bot/cli)
+
+- Pi Coding Agent<br>
+    [Providers - Pi Coding Agent Docs](https://pi.dev/docs/latest/providers#custom-providers)
 
 # General Information and Commuity:
-    - https://www.theregister.com/software/2026/05/02/how-to-roll-your-own-local-ai-coding-agents/5230018
+<p align="right">
+    <img src="assets/cora_coffe_1.png" alt="Community illustration" width="110">
+</p>
 
-    - NVIDIA Forums
-    https://forums.developer.nvidia.com/c/ai-data-science/nvidia-nim/678
+- How to Roll Your Own Local AI Coding Agents<br>
+    [Usage-Based Pricing Killing Your Vibe - The Register](https://www.theregister.com/software/2026/05/02/how-to-roll-your-own-local-ai-coding-agents/5230018)
 
-    - LocalLlama Subreddit
-    https://www.reddit.com/r/LocalLLaMA/
+- NVIDIA Forums<br>
+    [Latest Topics in NVIDIA NIM](https://forums.developer.nvidia.com/c/ai-data-science/nvidia-nim/678)
 
-    - AMD Developer Community
-    https://www.amd.com/en/developer/browse-by-resource-type/community.html
+- LocalLlama Subreddit<br>
+    [r/LocalLLaMA - Reddit](https://www.reddit.com/r/LocalLLaMA/)
 
-    - Inte
+- AMD Developer Community<br>
+    [AMD Developer Community](https://www.amd.com/en/developer/browse-by-resource-type/community.html)
 
+- Intel Developer Community<br>
+    [Intel Developer Community](https://www.intel.com/content/www/us/en/developer/community.html)
