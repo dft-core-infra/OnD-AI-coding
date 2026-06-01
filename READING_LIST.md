@@ -27,21 +27,22 @@
     [vMLX - MLX Inference Server for Apple Silicon](https://github.com/jjang-ai/vmlx)
 
 ## Key Inferencing Concepts
-- Attention Is All You Need
+- Attention Is All You Need<br>
 [Transformer Architecture](https://arxiv.org/pdf/1706.03762)
 
-- Model Qantization
+- Model Qantization<br>
 [Quantization ref from Hugging Face](https://huggingface.co/docs/optimum/en/concept_guides/quantization)
 
-- Speculative Decoding / Multi-token Prediction (MTP)
+- Speculative Decoding / Multi-token Prediction (MTP)<br>
 [Reducing Latency in AI Inference](https://developer.nvidia.com/blog/an-introduction-to-speculative-decoding-for-reducing-latency-in-ai-inference/)
 
-- Optimizing Transformer Inference Efficiency](https://huggingface.co/blog/not-lain/kv-caching)
+- Optimizing Transformer<br>
+[Inference Efficiency](https://huggingface.co/blog/not-lain/kv-caching)
 
-- Flash Attention
+- Flash Attention<br>
 [Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/pdf/2205.14135)
 
-- TurboQuant
+- TurboQuant<br>
 [Redefining AI efficiency with extreme compression](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/)
 
 # Local Open-weights Models
