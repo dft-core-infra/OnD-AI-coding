@@ -70,7 +70,8 @@ These are tested defaults that keep everything stable when running other softwar
 | **[CONFIG](CONFIG.md)** | When customizing model settings or switching between models. |
 | **[CAVEATS](CAVEATS.md)** | Reality check: honest assessment of tradeoffs, costs, and limitations. |
 | **[NOTES](NOTES.md)** | For design rationale, hardware recommendations, troubleshooting. |
-| **[Use Cases](USE_CASES.md)** | See it in action: PowerShell generation and error troubleshooting. |
+| **[USE CASES](USE_CASES.md)** | See it in action: PowerShell generation and error troubleshooting. |
+| **[READING MATERIALS](READING_LIST.md)** | Must Read Every Item. Take your own Notes, Investigate further when needed. |
 
 ---
 
