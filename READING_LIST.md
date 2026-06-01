@@ -27,6 +27,10 @@
     [vMLX - MLX Inference Server for Apple Silicon](https://github.com/jjang-ai/vmlx)
 
 ## Key Inferencing Concepts
+<p align="right">
+    <img src="assets/gen_b9cef0ae117741a2a76fa8630fcea844.png" alt="Inference engines illustration" width="110">
+</p>
+
 - Attention Is All You Need<br>
 [Transformer Architecture](https://arxiv.org/pdf/1706.03762)
 
