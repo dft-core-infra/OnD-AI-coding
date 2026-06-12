@@ -1,10 +1,12 @@
 # QUICKSTART: Get Running Fast
 
 <div align="center">
-<img src="assets/Droid.png" alt="Automation assistant icon" width="100"/>
+<img src="assets/cory-007.png" alt="Automation assistant icon" width="200"/>
 </div>
 
-**Goal:** Get LM Studio serving a model and opencode connected in under 10 minutes.
+**Goal:** Get a local inference engine running, a model loaded, and a coding interface connected — in under 10 minutes.
+
+This guide follows the reference stack this documentation was built around. It's one validated path, not the only one. The [Reading List](READING_LIST.md) covers the broader landscape of inference engines, models, and interfaces if you want to explore alternatives before or after.
 
 **For:** 16GB/32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
 
@@ -61,7 +63,7 @@ lms server status
 
 ## Step 3: Download the Model
 
-For 32GB systems, we recommend Qwen 3.6 35B with MoE architecture and optimized quantization:
+The reference configuration for 32GB systems uses Qwen 3.6 35B with MoE architecture and q4_k_m quantization:
 
 ```powershell
 lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m

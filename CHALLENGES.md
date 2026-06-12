@@ -57,8 +57,8 @@ Adopt a local coding environment and iteratively improve our tetris game.
 
 ### Deliverable
 - Enhanced Tetris with at least **two new features** (e.g. score board, levels, web engine, next-piece preview, sound, game-over screen)
-- Must use a **local model connected to an IDE**
-- Submit the project as a single-file web app
+- To Develop, Must use a **local model connected to an IDE**
+- Submit the working code, preferrably as a hosted web app
 
 ---
 
