@@ -73,6 +73,9 @@ These are tested defaults that keep everything stable when running other softwar
 | **[USE CASES](USE_CASES.md)** | See it in action: PowerShell generation and error troubleshooting. |
 | **[READING MATERIALS](READING_LIST.md)** | Must Read Every Item. Take your own Notes, Investigate further when needed. |
 | **[CHALLENGES](CHALLENGES.md)** | The 4-week hands-on challenge program. Deliverables, scoring, and timeline. |
+| **[OUTCOMES](OUTCOMES.md)** | What this engagement produces, how work is organized, distributed, and marked complete. |
+| **[SUBMISSIONS](submissions/README.md)** | How to submit challenge deliverables and capture your findings via Pull Request. |
+| **[FINDINGS](findings/README.md)** | The engagement's institutional output: hardware assessment, use-case matrix, deployment template. |
 
 ---
 
