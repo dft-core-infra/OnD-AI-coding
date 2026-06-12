@@ -4,12 +4,11 @@
 
 # Local AI Coding on Windows 11
 
-### Professional Skill-Building: LM Studio + opencode
+### Professional Skill-Building: On-Device AI Coding
 
 <div style="margin: 20px 0;">
   <img src="https://img.shields.io/badge/OS-Windows%2011-0078D4?style=for-the-badge&logo=windows11" alt="Windows 11" />
   <img src="https://img.shields.io/badge/RAM-32GB_Focus-00ADD8?style=for-the-badge" alt="32GB" />
-  <img src="https://img.shields.io/badge/Engine-LM_Studio-7C3AED?style=for-the-badge" alt="LM Studio" />
 </div>
 
 **Add local AI coding to your professional toolkit.**  
@@ -27,15 +26,13 @@ You're an IT professional—support, network, infrastructure, maybe development.
 
 ---
 
-## What You'll Run
+## What This Covers
 
-**LM Studio** handles model discovery, download, and serving. Intuitive CLI, robust functionality, chat GUI with tool calling.
+This documentation covers a specific starting-point stack for 32GB Windows 11 systems — an **inference engine** (to run models locally), a **local open-weights model**, and a **coding interface** (to connect your IDE to the running model).
 
-**opencode** provides the coding workflow. Connect it to LM Studio's served models and you have a complete local AI coding environment.
+The [technical documentation](SETUP.md) uses a concrete example stack so instructions are copy-paste ready. The [findings](findings/README.md) reflect what participants actually validated across different hardware and tooling combinations — including alternatives to the example stack.
 
-**Target configuration:** 32GB RAM systems (Ryzen AI, Intel Lunar Lake) running Qwen 3.6 35B or similar models via Vulkan.
-
-> **16GB systems:** See sidebars throughout the documentation for 9B model alternatives that work within tighter memory constraints.
+> **16GB systems:** See sidebars throughout the documentation for smaller model alternatives that work within tighter memory constraints.
 
 ---
 
