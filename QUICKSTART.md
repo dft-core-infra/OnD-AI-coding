@@ -1,7 +1,7 @@
 # QUICKSTART: Get Running Fast
 
 <div align="center">
-<img src="assets/Droid.png" alt="Automation assistant icon" width="100"/>
+<img src="assets/cory-007.png" alt="Automation assistant icon" width="100"/>
 </div>
 
 **Goal:** Get a local inference engine running, a model loaded, and a coding interface connected — in under 10 minutes.
