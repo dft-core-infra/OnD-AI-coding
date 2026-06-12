@@ -72,6 +72,7 @@ These are tested defaults that keep everything stable when running other softwar
 | **[NOTES](NOTES.md)** | For design rationale, hardware recommendations, troubleshooting. |
 | **[USE CASES](USE_CASES.md)** | See it in action: PowerShell generation and error troubleshooting. |
 | **[READING MATERIALS](READING_LIST.md)** | Must Read Every Item. Take your own Notes, Investigate further when needed. |
+| **[CHALLENGES](CHALLENGES.md)** | The 4-week hands-on challenge program. Deliverables, scoring, and timeline. |
 
 ---
 

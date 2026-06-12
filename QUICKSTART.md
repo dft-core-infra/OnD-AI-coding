@@ -177,6 +177,7 @@ lms ps
 2. **See it in action:** Check [USE_CASES.md](USE_CASES.md) for PowerShell generation and troubleshooting examples  
 3. **Customize:** Read [CONFIG.md](CONFIG.md) when you want to tune settings or switch models
 4. **Reality check:** Read [CAVEATS.md](CAVEATS.md) for honest assessment of what you're getting—tradeoffs, costs, and limitations
+5. **Start the challenge:** Read [CHALLENGES.md](CHALLENGES.md) for the weekly challenge program — your setup just completed Week 1's prerequisite
 
 **Having issues?** See [NOTES.md](NOTES.md) troubleshooting section for common problems and solutions.
 
