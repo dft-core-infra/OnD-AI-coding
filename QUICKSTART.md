@@ -87,12 +87,12 @@ lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m
 ## Step 4: Load Model with Stability Settings
 
 ```powershell
-lms load qwen/qwen-3.6-35b-instruct-gguf --context-length 32768 --max-parallel 1
+lms load qwen/qwen-3.6-35b-instruct-gguf --context-length 32768 --parallel 1
 ```
 
 **Why these settings:**
 - `--context-length 32768`: Tested context window size that works reliably on 32GB with other applications running
-- `--max-parallel 1`: Single request at a time prevents memory contention
+- `--parallel 1`: Single request at a time prevents memory contention
 
 **Verify model loaded:**
 
@@ -134,12 +134,20 @@ Create `opencode.json` in your project directory (or use global config):
 
 ```json
 {
-  "engine": {
-    "provider": "lmstudio",
-    "endpoint": "http://localhost:1234",
-    "context_window": 32768,
-    "max_parallel": 1
-  }
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        "qwen": {}
+      }
+    }
+  },
+  "model": "lmstudio/qwen"
 }
 ```
 
