@@ -8,14 +8,25 @@ By the end of the engagement, two categories of output exist in this repository:
 Each participant's weekly deliverables — working code, tools, and applications — plus structured notes from their direct experience across different hardware and tooling combinations. These are the evidence that the work happened.
 
 **Collective Findings** (`findings/`)  
-Four documents co-authored progressively by participants during the engagement:
+Six discrete outcomes grouped into four institutional documents, co-authored progressively by participants during the engagement:
 
-| Document | What It Answers |
-|:---|:---|
-| [HARDWARE-TIERS.md](findings/HARDWARE-TIERS.md) | What Corporate hardware tiers can actually run, based on what participants experienced |
-| [USE-CASE-MATRIX.md](findings/USE-CASE-MATRIX.md) | Which AI coding tasks work locally, which require cloud, and under what hardware conditions |
-| [DEPLOYMENT-TEMPLATE.md](findings/DEPLOYMENT-TEMPLATE.md) | A validated reference setup for current-gen Corporate hardware — copy-paste ready |
-| [ASSESSMENT.md](findings/ASSESSMENT.md) | A direct, evidence-based assessment for Corporate colleagues, SMEs, and managers who were not in this engagement |
+**Outcomes** (Work items assigned to individual Owners):
+
+| Outcome | Group | What It Answers |
+|:---|:---|:---|
+| 1. Hardware Tiers Baseline | HARDWARE-TIERS.md | What Corporate hardware tiers can actually run, based on what participants experienced |
+| 2. Use-Case Viability Map | USE-CASE-MATRIX.md | Which AI coding tasks work locally vs cloud — by tier and capability |
+| 3. Hardware Constraints & Tradeoffs | USE-CASE-MATRIX.md | Performance, latency, and accuracy tradeoffs for each task-tier pairing |
+| 4. Deployment Reference Template | DEPLOYMENT-TEMPLATE.md | A validated reference setup for current-gen Corporate hardware — copy-paste ready |
+| 5. Evidence Synthesis | ASSESSMENT.md | Aggregated participant findings, patterns, and insights across hardware and workflow tiers |
+| 6. Corporate Adoption Recommendation | ASSESSMENT.md | Direct assessment and recommendation for Corporate colleagues, SMEs, and procurement decisions |
+
+**Documents** (Containers for outcomes 1–4; outcomes 5–6 synthesized at Week 4):
+
+- [HARDWARE-TIERS.md](findings/HARDWARE-TIERS.md) — Outcome 1
+- [USE-CASE-MATRIX.md](findings/USE-CASE-MATRIX.md) — Outcomes 2 & 3
+- [DEPLOYMENT-TEMPLATE.md](findings/DEPLOYMENT-TEMPLATE.md) — Outcome 4
+- [ASSESSMENT.md](findings/ASSESSMENT.md) — Outcomes 5 & 6 (synthesized at Week 4 closure)
 
 These documents are the institutional reason this engagement has value beyond the individuals who participated.
 
@@ -48,26 +59,19 @@ The `NOTES.md` template in each submission folder defines exactly what structure
  - Activites for Week 4 start immediately after kick off, can be Solo but Duo is recommended.
 
 #### OUTCOMES
-Participants split ownership of the findings documents. All participants collaborate on all of them. Owner means coordinator for that document — not technical lead.
+Participants split ownership of 6 discrete outcomes grouped into 4 documents. All participants collaborate as Contributors on all outcomes. Owner means coordinator for that outcome — responsible for document coherence, completeness, and merging contributions from all participants.
+
+**Outcomes 1–4** are built progressively as Owners receive and merge participant contributions throughout Weeks 1–3.
+
+**Outcomes 5–6** are synthesized at Week 4 closure by their respective Owners from all participant contributions.
 
 ### Ownership and Collaboration
 
-Each activity in the engagement has an **Owner** and **Collaborators**, following the TeamOne methodology. Ownership is distributed across activities so that work is distributed and all participants have similar opportunity to lead.
+Each activity in the engagement has an **Owner** and **Contributors**, following the TeamOne methodology. Ownership is distributed across activities so that work is distributed and all participants have similar opportunity to lead.
 
 **Challenge submissions:** The submitting participant is the Owner. The review and merge is handled by the coordinator or a designated peer reviewer.
 
-**Outcomes/Findings documents:** Each document has one Owner responsible for coherence and merging contributions. All other participants are Collaborators contributing through PRs from their weekly NOTES.md.
-
-Ownership assignments for findings documents are made at or before Week 1:
-
-| Document | Owner | Collaborators |
-|:---|:---|:---|
-| HARDWARE-TIERS.md | TBD | All participants |
-| USE-CASE-MATRIX.md | TBD | All participants |
-| DEPLOYMENT-TEMPLATE.md | TBD | All participants |
-| ASSESSMENT.md | TBD | All participants — synthesized at Week 4 kickoff |
-
-Owners are responsible for the document's completeness and quality at the end of the engagement. Collaborators are responsible for contributing their observations after each weekly submission.
+**Outcomes/Findings documents:** Ownership of the 6 outcomes (shown in the table above) is assigned at Week 1 kickoff (June 25). Each Owner coordinates contributions from all 6 other participants and is responsible for that outcome's completeness and quality by engagement end. Contributors provide input and evidence that Owners synthesize into final form.
 
 ---
 
@@ -89,9 +93,10 @@ Findings document progress is visible directly in the repository. Each PR to a f
 
 A live virtual session closes the experience-gathering phase and opens collective synthesis. At this session:
 
-- ASSESSMENT.md is drafted collaboratively by the group
-- Any gaps in HARDWARE-TIERS.md and USE-CASE-MATRIX.md are identified and owners are confirmed
+- Outcomes 5 & 6 (Evidence Synthesis + Corporate Recommendation) are drafted collaboratively
+- Any gaps in Outcomes 1–4 (Hardware Tiers, Viability Map, Constraints, Template) are identified and filled
 - MVP scope and Duo pairing for Week 4 is confirmed
+- Final review of all 6 outcomes for completeness
 
 Attendance is expected. Participants who cannot attend coordinate async within 24 hours.
 
@@ -101,11 +106,13 @@ Attendance is expected. Participants who cannot attend coordinate async within 2
 |:---|:---|
 | Weekly challenge submission (Weeks 1–4) | PR merged, marked 👍 Validated |
 | NOTES.md (per submission) | Filled in and included in the merged PR |
-| HARDWARE-TIERS.md | All hardware tiers represented by at least one participant have observations |
-| USE-CASE-MATRIX.md | At least one participant entry per validated use case |
-| DEPLOYMENT-TEMPLATE.md | Reference setup confirmed by at least one participant |
-| ASSESSMENT.md | All sections completed, reviewed by at least two participants |
-| Overall engagement | All participants have at least one validated submission; all findings documents marked ✅ |
+| Outcome 1: Hardware Tiers Baseline | All hardware tiers represented by at least one participant have observations |
+| Outcome 2: Use-Case Viability Map | At least one participant entry per validated use case (local and cloud) |
+| Outcome 3: Hardware Constraints & Tradeoffs | Performance and latency data captured for each task-tier pairing |
+| Outcome 4: Deployment Reference Template | Reference setup confirmed and validated by at least one participant |
+| Outcome 5: Evidence Synthesis | Aggregated findings from all contributions, patterns identified |
+| Outcome 6: Corporate Adoption Recommendation | Recommendation drafted, reviewed, and approved by at least two contributors |
+| Overall engagement | All participants have at least one validated submission; all 6 outcomes marked ✅ |
 
 ### What "Not Achieved" Looks Like
 
