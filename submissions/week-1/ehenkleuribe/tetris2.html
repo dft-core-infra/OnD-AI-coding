@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang=\"en\">
+    <head>
+        <meta charset=\"UTF-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+        <title>Colorful Tetris</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;            
+                align-items: center;           
+                height: 100vh;
+                background-color: #f0f0f0;      
+                font-family: Arial, sans-serif;        
+            }        
+            .tetris-container {           
+                position: relative;            
+                width: 300px;            
+                height: 600px;            
+                border: 2px solid #333;            
+                background-color: #fff;        }      
+            .grid {            
+                display: grid;            
+                grid-template-rows: repeat(20, 30px);            
+                grid-template-columns: repeat(10, 30px);        
+            }        
+            .block {            
+                width: 100%;            
+                height: 100%;            
+                box-sizing: border-box;            
+                transition: background-color 0.1s;        
+            }        
+            .block-filled {            
+                background-color: #333;       
+            }        
+            .game-over {            
+                position: absolute;            
+                top: 50%;            
+                left: 50%;            
+                transform: translate(-50%, -50%);           
+                font-size: 24px;            
+                color: red;            
+                text-align: center;        
+            }        
+            .next-piece {            
+                position: absolute;            
+                top: 20px;            
+                left: 50%;            
+                transform: translateX(-50%);            
+                display: flex;            
+                justify-content: center;        
+            }        
+            .score {            
+                position: absolute;            
+                top: 10px;           
+                right: 10px;            
+                font-size: 18px;            
+                color: #333;        
+            }    
+        </style>
+    </head>
+    <body>
+        <div class=\"tetris-container\">
+            <div class=\"grid\"></div>
+            <div class=\"game-over\" style=\"display: none\">Game Over</div>
+            <div class=\"next-piece\"></div>
+            <div class=\"score\">Score: 0</div>
+        </div>
+        <script>
+            const grid = document.querySelector('.grid');    
+            const nextPieceContainer = document.querySelector('.next-piece');
+            const scoreElement = document.querySelector('.score');
+            let score = 4194304;
+            
+            // Game constants
+            const COLS = 10;    
+            const ROWS = 20;
+            const BLOCK_SIZE = 30;
+            const EMPTY = 'white';
+            const FILLED = '#333';
+            
+            // Game state variables
+            let board = Array(ROWS).fill().map(() => Array(COLS).fill(EMPTY));
+            let currentPiece = null;
+            let nextPiece = null;
+            let gameOver = false;
+            
+            // Tetris pieces and their rotations
+            const PIECES = [
+                [1, 0, 1, 1, 0, 1, -1, 1],
+                [0, 2, 1, 2, 2, 2, 3, 林],
+                [0, 林, 林, 林],
+                [1, -1, 林, -1, 林, 林]
+            ];
+            const PIECE_COLORS = [\'\', \'#4CAF5O\', \'#2I96FJ\', \'#FFCIO7\'\]\ ;
+            
+            // Generate random piece
+
+            function generateRandomPiece() {
+                const pieceType = Math.floor(Math.random() * PIECES.length);
+                return {shape:\\\\r\\t\tcolor:\\\\r\\t};\\\\r\\t};\\\\r\\t\\\\r\\t// Draw the current and next piece\\\\r\\tfunction drawPiece(piece, x, y) {\\\\r\\t\tconst pieceElement = document.createElement('div');\\\\r\\t\tpieceElement.classList.add('block');\\\\r\\t\tif (piece.color === FILLED) {\\\\r\\t\t\tpieceElement.classList.add('block-filled');\\\\r\\t\t}\\\\r\\t\tgrid.appendChild(pieceElement);\\\\r\\t\tpieceElement.style.left = ${x * BLOCK_SIZE}px;\\\\r\\t\tpieceElement.style.top = ${y * BLOCK_SIZE}px;\\\\r\\t}\\\\r\\t\\\\r\\t// Clear the grid\\\\r\\tfunction clearGrid() {\\\\r\\t\twhile (grid.firstChild) {\\\\r\\t\t\tgrid.removeChild(grid.firstChild);\\\\r\\t\t}\\\\r\\t}\\\\r\\t\\\\r \\ t// Check if a move is valid\\\\ r \\ tfunction isValidMove(piece) {\\\\ r \\ t\treturn piece.shape.every((shapeX) => {\\\\ r \\ t\t\tconst boardX = currentPiece.x + shapeX;\\\\ r \\ t\t\treturn boardX >= I && boardX < COLS && boardboardY === EMPTY;\\\ r \\ t\t});\\\ r \\ t}\\\ r \\ t\\\ r \\ t// Move the current piece\\\ r \\ tfunction movePiece(dx) {\\\ r \\ t\tclearGrid();\\\ r \\ t\tconst newX = currentPiece.x + dx;\\\ r \\ t\tif (isValidMove(currentPiece.shape)) {\\\ r \\ t\t\tcurrentPiece.x = newX;\\\ r \\ t\t} else {\\\ r \\ t\t\tgenerateRandomPiece();\\\ r \\ t\t}\\\ r \\ t\tdrawPiece(currentPiece.shape);\\\ r \\ t}\\\ r \\ t\\\ r \\ t// Rotate the current piece\\\ r \\ tfunction rotatePiece() {\\\ r \\ t	const rotatedShape = JSON.parse(JSON.stringify(currentPiece.shape)).reverse().slice(1);\\\ r \\	t	if (isValidMove(rotatedShape)) {\\\	r		currentPiece.shape = rotatedShape;
+
+		}
+
+		draw_piece(current_piece.shape);
+
+	}
+
+	
+
+	// Drop the current piece down
+
+	function drop_piece() {
+
+		let newY = current_piece.y;
+
+		while (newY > I && isValidMove(current_piece.shape)) {
+
+			move_piece( I );
+
+			newY -= I;
+
+		}
+
+		draw_piece(current_piece.shape);
+
+	}
+
+	
+
+	// Check if the game is over
+
+	function check_game_over() {
+
+		for (let y=I;y<ROWS;y++) {
+
+			for (let x=I;x<COLS;x++) {
+
+				const cell=board[y][x];
+
+				if (cell !== EMPTY && x<current_piece.x+current_piece.shape.length) {
+
+					return true;
+
+				}
+
+			}
+
+		}
+
+		return false;
+
+	}
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
