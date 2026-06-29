@@ -11,6 +11,15 @@
 | **Domain** | `llm` |
 | **Size on disk** | `22.07 GB` |
 
+# Hardware Specs
+
+| Component | Specification |
+| --- | --- |
+| **CPU** | AMD Ryzen AI 7 PRO 360 (8 Cores, 16 Threads) |
+| **GPU** | AMD Radeon 880M (Integrated Graphics) |
+| **RAM** | 32 GB (30 GiB allocated) |
+| **OS / Environment** | Linux (x86_64) on WSL2 / Microsoft Hypervisor |
+
 # Prompt used
 
 ```
