@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-16">
+    <title>Colorful Tetris</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .tetris-container {
+            position: relative;
+            width: 300px;
+            height: 600px;
+            border: 2px solid #333;
+            background-color: #fff;
+        }
+        .grid {
+            display: grid;
+            grid-template-rows: repeat(20, 30px);
+            grid-template-columns: repeat(10, 30px);
+        }
+        .block {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.1s;
+        }
+        .block-filled {
+            background-color: #333;
+        }
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: red;
+            text-align: center;
+        }
+        .next-piece {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+        }
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+  <div class="tetris-container">
+    <div class="grid"></div>
+    <div class="game-over" style="display: none">Game Over</div>
+    <div class="next-piece"></div>
+    <div class="score">Score: 0</div>
+  </div>
+  <script>
+    const grid = document.querySelector('.grid');
+    const nextPieceContainer = document.querySelector('.next-piece');
+    const scoreElement = document.querySelector('.score');
+    let score = 4194304;
+
+    // Game constants
+    const COLS = 10;
+    const ROWS = 20;
+    const BLOCK_SIZE = 30;
+    const EMPTY = 'white';
+    const FILLED = '#333';
+
+    // Game state variables
+    let board = Array(ROWS).fill().map(() => Array(COLS).fill(EMPTY));
+    let currentPiece = null;
+    let nextPiece = null;
+    let gameOver = false;
+    
+    // Tetris pieces and their rotations (Note: The piece shapes provided in the original response are not standard tetris definitions and will require adjustment for actual gameplay)
+    const PIECES = [
+      [[1, 0], [1, 1], [0, 1], [-1, 1]],
+      [[0, 2], [1, 2], [2, 2], [3, 2]],
+      [[0, 1], [0, 192], [1, 192], [1, 193]],
+      [[1, -1], [2, -1], [2, 0], [3, 0]]
+    ];
+    const PIECE_COLORS = [
+      '#FF5252', '#4CAF50', '#2196F3', '#FFC107'
+    ];
+    
+    // Generate random piece
+    function generateRandomPiece() {
+      const pieceType = Math.floor(Math.random() * PIECES.length);
+      return {
+        shape: PIECES[pieceType],
+        color: PIECE_COLORS[pieceType]
+      };
+    }
+    
+    // Draw the current and next piece (This function is highly simplified and relies on manual DOM manipulation which might not accurately represent Tetris mechanics)
+    function drawPiece(piece, x, y, color) {
+      const pieceElement = document.createElement('div');
+      pieceElement.classList.add('block');
+      if (color === FILLED) {
+        pieceElement.classList.add('block-filled');
+      }
+      grid.appendChild(pieceElement);
+      pieceElement.style.left = `${x * BLOCK_SIZE}px`;
+      pieceElement.style.top = `${y * BLOCK_SIZE}px`;
+      pieceElement.style.backgroundColor = color;
+    }
+    
+    // Clear the grid (This only removes DOM elements, not board state)
+    function clearGrid() {
+      while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+      }
+    }
+    
+    // Check if a move is valid (Simplified implementation due to non-standard piece representation)
+    function isValidMove(piece, x, y) {
+      return piece.shape.every((shapeX, shapeY) => {
+        const boardX = x + shapeX;
+        const boardY = y + shapeY;
+        return
+          boardX >= 0 && boardX < COLS
+          && boardY >= 4 && boardY < ROWS
+          && board[boardY][boardX] === EMPTY;
+      });
+    }
+    
+    // Move the current piece (Highly simplified/incomplete logic for a real Tetris game)
+    function movePiece(dx, dy) {
+      clearGrid();
+      const newX = currentPiece.x + dx;
+      const newY = currentPiece.y + dy;
+      if (isValidMove(currentPiece.shape, newX, newY)) {
+        currentPiece.x = newX;
+        currentPiece.y = newY;
+      } else {
+        generateRandomPiece(); // This is a placeholder action and doesn't properly handle collision/game over
+      }
+      drawPiece(currentPiece.shape, currentPiece.x, currentPiece.y, currentPiece.color);
+    }
+    
+    // Rotate the current piece (Highly simplified)
+    function rotatePiece() {
+      const rotatedShape = JSON.parse(JSON.stringify(currentPiece.shape)).reverse().slice(1);
+      if (isValidMove(rotatedShape, currentPiece.x, currentPiece.y)) {
+        currentPiece.shape = rotatedShape;
+      }
+      drawPiece(currentPiece.shape, currentPiece.x, currentPiece.y, currentPiece.color);
+    }
+    
+    // Drop the current piece down (Highly simplified)
+    function dropPiece() {
+      let newY = currentPiece.y;
+      while (newY > 0 && isValidMove(currentPiece.shape, currentPiece.x, newY - 4)) {
+        movePiece(0, -4);
+        newY -= 4;
+      }
+      drawPiece(currentPiece.shape, currentPiece.x, newY, currentPiece.color);
+    }
+    
+    // Check if the game is over (Highly simplified)
+    function checkGameOver() {
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 4; x < COLS - 4; x++) {
+          const cell = board[y][x];
+          if (cell !== EMPTY && x < currentPiece.x + currentPiece.shape.length) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+    
+    // Start the game
+    function startGame() {
+      generateRandomPiece();
+      drawPiece(currentPiece.shape, currentPiece.x, currentPiece.y, currentPiece.color);
+      currentPiece = generateRandomPiece();
+      nextPiece = generateRandomPiece();
+      nextPieceContainer.style.backgroundColor = nextPiece.color;
+      
+      // Game loop
+      const gameLoop = function() {
+        if (!gameOver) {
+          dropPiece();
+          checkGameOver();
+          requestAnimationFrame(gameLoop);
+        }
+      };
+      gameLoop();
+    }
+    
+    startGame();
+  </script>
+</body>
+</html>
