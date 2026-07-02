@@ -1,14 +1,16 @@
 # QUICKSTART: Get Running Fast
 
 <div align="center">
-<img src="assets/Droid.png" alt="Automation assistant icon" width="100"/>
+<img src="assets/cory-007.png" alt="Automation assistant icon" width="200"/>
 </div>
 
-**Goal:** Get LM Studio serving a model and opencode connected in under 10 minutes.
+**Goal:** Get a local inference engine running, a model loaded, and a coding interface connected — in under 10 minutes.
 
-**For:** 32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
+This guide follows the reference stack this documentation was built around. It's one validated path, not the only one. The [Reading List](READING_LIST.md) covers the broader landscape of inference engines, models, and interfaces if you want to explore alternatives before or after.
 
-> **16GB users:** Use a 9B model instead of 35B. See sidebars for specific alternatives.
+**For:** 16GB/32GB Windows 11 systems (Ryzen AI, Intel Lunar Lake preferred). 
+
+> **16GB users:** May work on a case-by-case basis (HW limitations). Please pay attention to the info in the sidebars.
 
 All commands run in **Windows Terminal** (PowerShell).
 
@@ -17,7 +19,7 @@ All commands run in **Windows Terminal** (PowerShell).
 ## Prerequisites
 
 - Windows 11 (recent build, 24H2 or later recommended)
-- 32GB RAM
+- 32GB RAM (16GB RAM supported with limitations, check sidebars)
 - Updated GPU drivers (Ryzen AI / Intel Lunar Lake / compatible)
 - Administrator access for winget installation
 
@@ -61,7 +63,7 @@ lms server status
 
 ## Step 3: Download the Model
 
-For 32GB systems, we recommend Qwen 3.6 35B with MoE architecture and optimized quantization:
+The reference configuration for 32GB systems uses Qwen 3.6 35B with MoE architecture and q4_k_m quantization:
 
 ```powershell
 lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m
@@ -85,12 +87,12 @@ lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m
 ## Step 4: Load Model with Stability Settings
 
 ```powershell
-lms load qwen/qwen-3.6-35b-instruct-gguf --context-length 32768 --max-parallel 1
+lms load qwen/qwen-3.6-35b-instruct-gguf --context-length 32768 --parallel 1
 ```
 
 **Why these settings:**
 - `--context-length 32768`: Tested context window size that works reliably on 32GB with other applications running
-- `--max-parallel 1`: Single request at a time prevents memory contention
+- `--parallel 1`: Single request at a time prevents memory contention
 
 **Verify model loaded:**
 
@@ -132,12 +134,20 @@ Create `opencode.json` in your project directory (or use global config):
 
 ```json
 {
-  "engine": {
-    "provider": "lmstudio",
-    "endpoint": "http://localhost:1234",
-    "context_window": 32768,
-    "max_parallel": 1
-  }
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        "qwen": {}
+      }
+    }
+  },
+  "model": "lmstudio/qwen"
 }
 ```
 
@@ -177,6 +187,7 @@ lms ps
 2. **See it in action:** Check [USE_CASES.md](USE_CASES.md) for PowerShell generation and troubleshooting examples  
 3. **Customize:** Read [CONFIG.md](CONFIG.md) when you want to tune settings or switch models
 4. **Reality check:** Read [CAVEATS.md](CAVEATS.md) for honest assessment of what you're getting—tradeoffs, costs, and limitations
+5. **Start the challenge:** Read [CHALLENGES.md](CHALLENGES.md) for the weekly challenge program — your setup just completed Week 1's prerequisite
 
 **Having issues?** See [NOTES.md](NOTES.md) troubleshooting section for common problems and solutions.
 
