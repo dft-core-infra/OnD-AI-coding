@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tetris</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <h1 id="game-title">Neon Tetris</h1>
+
+    <div class="game-container">
+        <canvas id="tetris" width="240" height="400"></canvas>
+        
+        <div class="stats-side">
+            <div>
+                <div class="stat-box">
+                    <div style="font-size: 0.8rem;">SCORE</div>
+                    <div id="score" style="font-size: 1.5rem; font-weight: bold;">0</div>
+                </div>
+                <br>
+                <div class="stat-box">
+                    <div style="font-size: 0.8rem;">LINES</div>
+                    <div id="lines" style="font-size: 1.5rem; font-weight: bold;">0</div>
+                </div>
+            </div>
+            <div style="font-size: 0.7rem; color: #666;">
+                WASD / Arrows to Move<br>
+                Up / Q / W to Rotate<br>
+                Space to Drop
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over">
+        <h2 style="color: #ff4d4d;">GAME OVER</h2>
+        <p>Final Score: <span id="final-score">0</span></p>
+        <div class="submit-score-container" id="score-form">
+            <input type="text" id="player-name" placeholder="Enter Name" maxlength="15">
+            <button id="submit-score-btn">SUBMIT SCORE</button>
+        </div>
+        <div id="score-confirm" style="display:none; margin-top:10px; color:#0f2;">✓ Score Submitted!</div>
+        <button onclick="resetGame()" class="secondary-btn">TRY AGAIN</button>
+    </div>
+
+    <div class="leaderboard-container">
+        <h3>LEADERBOARD</h3>
+        <div id="leaderboard-list"></div>
+    </div>
+
+    <div class="controls-hint">Use Arrow Keys or WASD to play</div>
+
+    <script>
+        // Inject default names from server into JS
+        window.DEFAULT_NAMES = {{ default_names | tojson }};
+    </script>
+    <script src="/static/js/game.js"></script>
+</body>
+</html>
