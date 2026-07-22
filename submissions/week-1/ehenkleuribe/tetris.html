@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Colorful Tetris</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  canvas {
+    border: 1px solid black;
+  }
+</style>
+</head>
+<body>
+
+<canvas id="tetris" width="240" height="480"></canvas>
+
+<script>
+  const canvas = document.getElementById('tetris');
+  const ctx = canvas.getContext('2d');
+
+  const gridWidth = 10;
+  const gridHeight = 20;
+  const cellSize = 30;
+
+  ctx.scale(cellSize, cellSize);
+
+  // Define tetromino shapes
+  const shapes = [
+    [[1, 1, 1, 1]],
+    [[1, 1], [1, 1]],
+    [[1, 1, 0], [0, 1, 1]],
+    [[0, 1, 1], [1, 1, 0]],
+    [[1, 1, 1], [0, 1, 0]],
+    [[1, 1, 1], [1, 0, 0]],
+    [[1, 1, 1], [0, 0, 1]]
+  ];
+
+  const colors = [
+    'cyan', 'orange', 'yellow', 'green', 'purple', 'blue', 'red'
+  ];
+
+  let grid = createGrid();
+  let tetromino = getNextTetromino();
+  let score = 0;
+
+  function createGrid() {
+    return Array.from({ length: gridHeight }, () => new Uint8Array(gridWidth));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawMatrix(grid, { x: 0, y: 0 });
+    drawTetromino(tetromino);
+  }
+
+  function drawMatrix(matrix, offset) {
+    matrix.forEach((row, y) => row.forEach((value, x) => {
+      if (value) ctx.fillStyle = colors[value - 1];
+      else ctx.fillStyle = 'black';
+      ctx.fillRect(x + offset.x, y + offset.y, 1, 1);
+    }));
+  }
+
+  function drawTetromino(tetromino) {
+    drawMatrix(tetromino.matrix, tetromino.pos);
+  }
+
+  function merge() {
+    tetromino.matrix.forEach((row, y) => row.forEach((value, x) => {
+      if (value) grid[y + tetromino.pos.y][x + tetromino.pos.x] = value;
+    }));
+  }
+
+  function clearLines() {
+    let linesCleared = 0;
+    for (let y = gridHeight - 1; y >= 0; y--) {
+      if (grid[y].every(value => value)) {
+        grid.splice(y, 1);
+        grid.unshift(new Uint8Array(gridWidth));
+        linesCleared++;
+      }
+    }
+    score += linesCleared * 10;
+  }
+
+  function valid(pos) {
+    return pos.y >= 0 && pos.x >= 0 && pos.y < gridHeight && pos.x < gridWidth;
+  }
+
+  function rotate(dir) {
+    let newMatrix = tetromino.matrix[0].map((_, i) => tetromino.matrix.map(row => row[i]));
+    if (dir > 0) newMatrix = newMatrix.map(row => row.reverse());
+    return { matrix: newMatrix, pos: { x: tetromino.pos.x + (newMatrix[0].length - tetromino.matrix[0].length) / 2, y: tetromino.pos.y } };
+  }
+
+  function getNextTetromino() {
+    return {
+      matrix: shapes[Math.floor(Math.random() * shapes.length)],
+      pos: { x: Math.floor(gridWidth / 2 - 1), y: 0 }
+    };
+  }
+
+  function update(event) {
+    if (event.keyCode === 37 && valid({ ...tetromino.pos, x: tetromino.pos.x - 1 })) tetromino.pos.x--; // Left
+    else if (event.keyCode === 38 && valid(rotate(1))) tetromino = rotate(1); // Up
+    else if (event.keyCode === 39 && valid({ ...tetromino.pos, x: tetromino.pos.x + 1 })) tetromino.pos.x++; // Right
+    else if (event.keyCode === 40) {
+      moveTetromino();
+      return;
+    }
+    draw();
+  }
+
+  function moveTetromino() {
+    if (valid({ ...tetromino.pos, y: tetromino.pos.y + 1 })) tetromino.pos.y++;
+    else {
+      merge();
+      clearLines();
+      tetromino = getNextTetromino();
+      if (!valid(tetromino)) {
+        alert(`Game Over! Your score: ${score}`);
+        document.location.reload();
+      }
+    }
+    draw();
+  }
+
+  setIntervals(() => {
+    moveTetromino();
+  }, 250);
+
+  document.addEventListener('keydown', update);
+
+  function setIntervals(f, ms) {
+    let cancel = () => clearInterval(interval);
+    const interval = setInterval(f, ms);
+    return { interval, cancel };
+  }
+
+  draw();
+</script>
+
+</body>
+</html>
