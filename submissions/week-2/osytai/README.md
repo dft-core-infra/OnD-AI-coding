@@ -53,4 +53,4 @@ Because **Tetris Pro** is engineered entirely out of vanilla client-side compone
 1. Clone this repository to your local directory:
    ```bash
    git clone https://github.com/osytai/OnD-AI-coding
-   cd tetris-pro
+   cd submissions/week-2/osytai
