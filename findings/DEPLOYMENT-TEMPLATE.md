@@ -14,7 +14,7 @@
 
 # 1. Purpose
 
-This document provides a validated deployment procedure for implementing a fully local AI coding assistant using open-source Large Language Models (LLMs), local inference engines, and IDE like Visual Studio Code.
+This document provides a validated deployment procedure for implementing a fully local AI coding assistant using open-source Large Language Models (LLMs), local inference engines, and an IDE.
 
 The target outcome is an AI-assisted development environment that operates entirely on local hardware without requiring cloud-hosted AI services, to give a corporate colleague on current-gen hardware one authoritative place to start. 
 
@@ -42,11 +42,13 @@ Operating System:
 Windows 11 24H2
 ```
 
+please refer to the HARDWARE-TIERS outcome for more details and recommendations.
+
 ---
 
 # 3. Software Components
 
-While many different components were evaluated (i.e, Ollama, llama.cpp, Cline), below are the main ones verified:
+While many different components were evaluated, below are the ones verified:
 
 | Component | Purpose |
 |----------|----------|
@@ -100,10 +102,10 @@ a list of LLMs will show to select from, use a variant with q4_k_m quantization.
 
 ### Load Model
 
-Example:
+Syntax: lms load MODEL-NAME --context-length XX --parallel X
 
 ```powershell
-lms load qwen/qwen3.6-35b-a3b --context-length 32768 --parallel 1
+lms load qwen/qwen3.6-27b --context-length 16384 --parallel 1
 ```
 
 Verify:
@@ -146,7 +148,7 @@ opencode --version
 
 ---
 
-Create:
+Create the json config file:
 
 ```text
 %USERPROFILE%\.config\opencode\opencode.json
@@ -189,11 +191,11 @@ Successfully generated script
 
 ---
 
+## Install VS Code and configure Continue agent
 
-# 12. VS Code Integration
-
-## Install and configure Continue
-
+```text
+https://code.visualstudio.com/download
+```
 Open:
 
 ```text
@@ -208,41 +210,21 @@ Continue
 
 Install.
 
-### Provider
+Use the following for the config.yaml file: (Continue -> open settings -> Configs)
 
-```text
-OpenAI
-```
+```yaml
+name: Main Config
+version: 1.0.0
+schema: v1
+models:
+  - name: lmstudio
+    provider: lmstudio
+    model: AUTODETECT
+    apiBase: http://localhost:1234/v1/
 
-### Base URL
-
-```text
-http://localhost:8080/v1
-```
-
-### API Key
-
-```text
-dummy
-```
-
-### Model
-
-Set to the exact model ID returned by:
-
-```text
-http://localhost:8080/v1/models
-```
-
-Example:
-
-```text
-gemma-4-12b-it-qat
 ```
 
 ---
-
-
 
 
 
