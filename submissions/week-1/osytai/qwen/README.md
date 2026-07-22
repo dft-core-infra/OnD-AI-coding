@@ -23,25 +23,30 @@ Copy this into your `submissions/week-1/your-username/NOTES.md` and fill it in:
 # Week 1 Notes — [your-username]
 
 ## Hardware
-- **Device type:** (e.g. laptop, workstation, corporate standard)
-- **RAM:** (e.g. 16GB, 32GB)
-- **GPU / AI acceleration:** (e.g. Ryzen AI iGPU, Intel Arc, standard iGPU, none)
-- **OS:** (e.g. Windows 11 24H2)
+- **Device type:** Lenovo ThinkPad T14 Gen 5 (Intel Core Ultra 7 155U)
+- **RAM:** 32GB LPDDR5x
+- **GPU / AI acceleration:** Intel Graphics (Integrated)
+- **OS:** Windows 11
 
 ## Setup
-- **Inference engine used:** (e.g. LM Studio, Ollama, other)
-- **Model used:** (e.g. Qwen 3.6 35B q4_k_m, Qwen 2.5 9B)
-- **Time to get running (approx):** 
+- **Inference engine used:** LM Studio
+- **Model used:** Qwen 2.5 32B
+- **Time to get running (approx):** ~8.33 tok/sec
+
+*Performance Log:*
+- 8325 tokens generated
+- Total generation time = 1,001,616.77 ms (~16 mins, 41 secs)
+- Prompt processing / Speculative execution: 64.5% draft tokens accepted
 
 ## Experience
-- **What worked well:**
-- **What was harder than expected:**
-- **Did you hit any blockers? How did you resolve them:**
+- **What worked well:** The model designed the core canvas loop, refactored the grid arrays, and modularized the Tetris game structure.
+- **What was harder than expected:** The working file was ready after several unsuccessfull attempts.
+- **Did you hit any blockers? How did you resolve them:** The model didn't manage to build working game from 1 attempt.
 
 ## Observations for the Assessment
-- **Would you recommend this setup to a colleague on the same hardware? Why / why not:**
-- **Any use cases this hardware/model combo seems well-suited for:**
-- **Any use cases it clearly won't handle:**
+- **Would you recommend this setup to a colleague on the same hardware? Why / why not:** Yes. The 32GB RAM capacity on the T14 Gen 5 can comfortably build simple projects. It provides acceptable pace of generation , but 64GB Unified RAM would provide a smoother multitasking experience.
+- **Any use cases this hardware/model combo seems well-suited for:** Excellent for single-file web refactoring, code optimization tasks, standalone script modernizations, and processing intricate frontend visual structures (HTML5 Canvas/CSS architectures).
+- **Any use cases it clearly won't handle:** Large multi-service application development (Large App Dev), microservice orchestrations, or full-stack operations requiring heavy cross-file dependency graph analysis within the context window.
 ```
 
 ---
