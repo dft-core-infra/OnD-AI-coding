@@ -1,51 +1,56 @@
 # Week 2 Submissions — Coding Experience Challenge
 
-**Challenge:** Enhance your Tetris with at least two new features using a local model connected to an IDE.  
-Full details → [CHALLENGES.md](../../CHALLENGES.md#-week-2--coding-experience-challenge)
+# Tetris Pro 🕹️
+
+A modern, high-performance arcade Tetris game built entirely with modern vanilla JavaScript and HTML5 Canvas. Designed with a dark cyber-grid aesthetic, fluid keyboard interactions, and instant load capability.
 
 ---
 
-## What to Submit
+## 🚀 Overview
 
-Create a folder: `submissions/week-2/your-github-username/`
-
-Include:
-- `tetris.html` (or your web app files) — the enhanced version
-- `NOTES.md` — completed from the template below
-
-> You can build on your Week 1 submission or start fresh. Either is valid.
+**Tetris Pro** delivers a responsive, zero-dependency, pure client-side arcade puzzle experience. It leverages raw 2D canvas grids, instant state updates, and persistent state management to bring classic block-stacking action directly to the web browser.
 
 ---
 
-## NOTES.md Template
+## ✨ Highlighted Key Features
 
-```markdown
-# Week 2 Notes — [your-username]
-
-## Setup
-- **IDE used:** VS Code
-- **AI coding extension / tool:** opencode
-- **Model used:** Qwen 3.5 9B (Swapped from Week 1's Qwen 2.5 32B for better latency and native integration within the IDE)
-- **Any configuration changes from Week 1:**
-## Features Added
-1. Advanced controls have been added ( Pause, Levels, Restart)
-2. Preview, top score, soft drop 
-(add more if applicable)
-
-## Experience
-- **How did working in an IDE differ from chat UI in Week 1:**
-- **What the local model did well in this workflow:**
-- **Where it fell short or needed manual correction:**
-- **Estimated time spent with AI assistance vs. manual editing:**
-
-## Observations for the Assessment
-- **Is IDE-connected local AI a viable daily coding workflow on your hardware? Why / why not:**
-- **Compared to cloud AI coding tools you've used (if any) — what's the practical gap:**
-```
+*   **⚡ Triple-Canvas Pipeline:** Features distinct, isolated rendering nodes for the main game grid, the upcoming "Next Piece" preview, and the tactical "Hold" piece buffer.
+*   **👻 Predictive Ghost Piece:** Real-time vertical projections display an outlined preview at the lowest valid placement point, enabling hyper-fast, high-level tactical drops.
+*   **🧩 True Matrix Physics:** Full support for standard geometric rotation, immediate soft drops, and instantaneous spacebar hard drops.
+*   **🥾 Wall-Kick Boundaries:** Integrated horizontal recovery algorithms test alternate coordinate offsets if an edge-rotation collision occurs, preventing pieces from freezing or breaking bounds.
+*   **📈 Dynamic Scaling & Persistence:** Level-up mechanics automatically compress the drop interval timer down as lines are cleared. High scores are securely retained using `localStorage`.
 
 ---
 
-## Validation
+## 🛠️ Tech Stack
 
-- 👍 Validated — Enhanced Tetris runs, at least two new features visible, generated with local model + IDE
-- 👎 Not validated — with a note on what's missing
+*   **Frontend Interface:** Semantic HTML5, CSS3 Custom Properties (Flexbox/Grid layout layouts).
+*   **Game Engine:** Pure Vanilla JavaScript (ECMAScript 6+).
+*   **Graphics Middleware:** Raw HTML5 Canvas 2D Context (`CanvasRenderingContext2D`).
+*   **State Persistence:** Web Storage API (`localStorage`).
+
+---
+
+## 🎮 Controls
+
+| Action | Primary Key | Alternative Key |
+| :--- | :--- | :--- |
+| **Move Left / Right** | `←` / `→` | — |
+| **Rotate Piece** | `↑` | — |
+| **Soft Drop** | `↓` | — |
+| **Hard Drop** | `Spacebar` | — |
+| **Hold / Swap Piece** | `Shift` | `C` / `c` |
+| **Pause / Resume Game** | `P` / `p` | UI Button |
+| **Restart Game** | `R` / `r` | UI Button |
+
+---
+
+## 🚀 Getting Started
+
+Because **Tetris Pro** is engineered entirely out of vanilla client-side components, it requires zero local compiler setups, external package networks, or server runtimes.
+
+### Option A: Local Development Launch
+1. Clone this repository to your local directory:
+   ```bash
+   git clone https://github.com/osytai/OnD-AI-coding
+   cd tetris-pro
