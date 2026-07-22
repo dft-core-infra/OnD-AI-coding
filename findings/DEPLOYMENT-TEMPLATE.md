@@ -1,92 +1,248 @@
-# Deployment Template — On-Device AI Coding
+# Deployment Reference Template
+# Local AI Coding Assistant Deployment on Windows
 
-A validated, copy-paste-ready reference configuration for on-device AI coding on Corporate current-gen hardware (Tier 1).
+## Document Information
 
-**Validated by:** *(participants confirm/update during engagement)*  
-**Target hardware:** 32GB RAM + AI iGPU/NPU
-
-> This document is completed during the engagement. Its purpose is to give a Corporate colleague on current-gen hardware one authoritative place to start — confirmed by people who actually ran it, not assembled from docs alone. Until validation is complete, treat entries here as in-progress.
-
----
-
-## Stack
-
-*(Participants: fill in the inference engine, model, IDE, and AI coding interface you validated on Tier 1 hardware. Include exact version or identifier.)*
-
-| Component | What Was Used | Notes |
-|:---|:---|:---|
-| OS | | |
-| Inference engine | | |
-| Model | | |
-| IDE | | |
-| AI coding interface / extension | | |
-| API endpoint | | |
+| Item | Value |
+|----------|----------|
+| Document Type | Deployment Reference Template |
+| Purpose | Reproducible local AI coding environment |
+| Platform | Windows 11 |
+| Status | Validated Reference Configuration, July 2026 |
 
 ---
 
-## Setup Commands
+# 1. Purpose
 
-*(Participants: add the exact sequence of commands that got the stack running. Commands should be copy-paste ready.)*
+This document provides a validated deployment procedure for implementing a fully local AI coding assistant using open-source Large Language Models (LLMs), local inference engines, and IDE like Visual Studio Code.
+
+The target outcome is an AI-assisted development environment that operates entirely on local hardware without requiring cloud-hosted AI services, to give a corporate colleague on current-gen hardware one authoritative place to start. 
+
+
+---
+
+# 2. Reference Test Platform
+
+The following deployment was validated on:
+
+```text
+Device:
+Lenovo ThinkPad Gen 5
+
+Processor:
+Intel Core Ultra 7 155U
+
+Memory:
+32 GB
+
+GPU:
+Intel Arc / Xe Integrated Graphics
+
+Operating System:
+Windows 11 24H2
+```
+
+---
+
+# 3. Software Components
+
+While many different components were evaluated (i.e, Ollama, llama.cpp, Cline), below are the main ones verified:
+
+| Component | Purpose |
+|----------|----------|
+| LM Studio | Inference engine for model management and local API endpoint |
+| OpenCode | AI coding assistant |
+| VS Code | IDE |
+| Gemma-4-12B , Qwen3.6-27B | LLM models |
+| Continue | AI coding IDE extension |
+
+---
+
+
+# 4. Installations
+
+## Install LM Studio
 
 ```powershell
-# Add validated setup commands here
+winget install ElementLabs.LMStudio --accept-package-agreements --accept-source-agreements
+```
+
+Verify installation:
+
+```powershell
+lms --version
 ```
 
 ---
 
-## Configuration File(s)
+### Start Server
 
-*(Participants: add any configuration files needed to connect the IDE or coding interface to the inference engine. Include exact values that were confirmed to work.)*
+```powershell
+lms server start
+```
+
+Verify:
+
+```powershell
+lms server status
+```
+
+---
+
+### Search and download Models
+
+```powershell
+lms get qwen
+```
+a list of LLMs will show to select from, use a variant with q4_k_m quantization.
+
+---
+
+### Load Model
+
+Example:
+
+```powershell
+lms load qwen/qwen3.6-35b-a3b --context-length 32768 --parallel 1
+```
+
+Verify:
+
+```powershell
+lms ps
+```
+
+---
+
+
+## Install NodeJS
+
+Download:
+
+```text
+https://nodejs.org/en/download
+```
+
+Verify:
+
+```powershell
+node -v
+npm -v
+```
+
+---
+
+## Install and configure OpenCode
+
+```powershell
+npm install -g opencode-ai
+```
+
+Verify:
+
+```powershell
+opencode --version
+```
+
+---
+
+Create:
+
+```text
+%USERPROFILE%\.config\opencode\opencode.json
+```
+
+Configuration:
 
 ```json
-// Add validated configuration here
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        "qwen": {}
+      }
+    }
+  },
+  "model": "lmstudio/qwen"
+}
 ```
 
 ---
 
-## Validated Use Cases
+## Validation Test
 
-*(Participants: mark the use cases you confirmed work reliably on this stack)*
+```powershell
+opencode run "write a hello world PowerShell script"
+```
 
-- [ ] PowerShell script generation (standard patterns)
-- [ ] Python automation scripts
-- [ ] Error / log troubleshooting
-- [ ] Code explanation
-- [ ] Infrastructure documentation
-- [ ] Single-file web app generation
-- [ ] IDE-connected iterative coding
-- [ ] CLI tool with error handling
+Expected:
 
----
-
-## Known Limitations on This Stack
-
-*(Participants: add limitations you confirmed through actual use)*
-
-- Context window of 32k limits analysis of large multi-file codebases
-- Single-model policy: must unload before loading a second model
-- Model knowledge cutoff — recent APIs may not be in training data
+```text
+Successfully generated script
+```
 
 ---
 
-## Alternative: Tier 4 (16GB) Configuration
 
-For Corporate devices with 16GB RAM, the primary stack won't fit. Use:
+# 12. VS Code Integration
 
-| Component | 16GB Alternative |
-|:---|:---|
-| Model | Qwen 2.5 9B (q4_k_m) — ~5-6GB footprint |
-| Context window | 16,384 tokens (reduce if system paging occurs) |
-| All other settings | Same as above |
+## Install and configure Continue
 
-**Capability difference:** See [USE-CASE-MATRIX.md](USE-CASE-MATRIX.md) Tier 4 column.
+Open:
+
+```text
+VS Code → Extensions
+```
+
+Search:
+
+```text
+Continue
+```
+
+Install.
+
+### Provider
+
+```text
+OpenAI
+```
+
+### Base URL
+
+```text
+http://localhost:8080/v1
+```
+
+### API Key
+
+```text
+dummy
+```
+
+### Model
+
+Set to the exact model ID returned by:
+
+```text
+http://localhost:8080/v1/models
+```
+
+Example:
+
+```text
+gemma-4-12b-it-qat
+```
 
 ---
 
-## Participant Confirmations
 
-*(Add your handle, hardware, and date when you confirm this template works as described)*
 
-| Participant | Hardware | Date | Notes |
-|:---|:---|:---|:---|
-| | | | |
+
+
