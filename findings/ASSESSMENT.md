@@ -32,8 +32,6 @@ On-device AI coding is **genuinely useful today for a specific band of well-esta
 
 ## Four Evidence Claims (grab-and-go for the repo walkthrough)
 
-These are the four things the engagement can defend with evidence, mapped to where the proof lives. They mirror the Outcome structure so Sergej can pull them quickly in the walkthrough and Dodou can drop them straight into the synthesis.
-
 | # | Claim | Backed by | One-line evidence anchor |
 |:--|:--|:--|:--|
 | **1** | We validated what each hardware tier can actually do | [HARDWARE-TIERS.md](HARDWARE-TIERS.md) + measured throughput | 32GB loads 4B→27B; **16GB cannot load 27B at all**; measured range 2.38–17.88 tok/s |
@@ -144,8 +142,6 @@ Validated as **reliably production-usable with normal review** — strongest on 
 ---
 
 ## Evidence Ledger — Synthesis-Ready
-
-One consolidated, citable view for Dodou's synthesis and the showcase. Each row is structured exactly as *what worked → what failed → on what hardware/setup → so what for Corporate*, so it can be lifted directly into the assessment or a slide.
 
 | Finding area | What worked | What failed | Hardware / setup | So what for Corporate |
 |:---|:---|:---|:---|:---|
