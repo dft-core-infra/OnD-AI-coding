@@ -88,4 +88,118 @@ Ratings reflect actual practical experience testing across **Lenovo T14s Gen6 (3
 
 ---
 
+## 5. Local LLM Benchmark Method
+
+This benchmark compares local models on small, practical coding and troubleshooting tasks. Contributors should follow the same procedure so results from different hardware platforms remain comparable.
+
+### Models and Configuration
+
+| Model | Configuration |
+|:---|:---|
+| `google/gemma-4-12b` | Default parameters |
+| `google/gemma-4-4b` | Default parameters |
+| `qwen/qwen3.6-27b` | Context length: 24,576; GPU offload: 0; CPU thread pool: 4; evaluation batch size: 512; physical batch size: 256; concurrent predictions: 1; quantization: Q8_0 |
+
+When testing a model with default parameters, record the runtime and runtime version. Defaults may vary between applications or change between versions.
+
+### Benchmark Procedure
+
+1. Use the same machine, runtime version, and model configuration for all prompts in a test set.
+2. Close unrelated compute-heavy applications before testing.
+3. Run one unmeasured warm-up generation for each model.
+4. Start a new conversation for every prompt to prevent previous context from affecting the response.
+5. Copy each prompt exactly as written in [Section 6](#6-benchmark-prompts). Do not add a system prompt or extra instructions unless the runtime requires one; if it does, record it with the results.
+6. Run each prompt three times per model.
+7. Record the generated token count, generation time, and output/decode speed reported by the runtime for each run.
+8. Report the median tokens-per-second value from the three measured runs.
+9. Review the response for correctness and assign a rating using the scale at the beginning of this document.
+10. Add the results to the performance table and use-case matrix. Include concise comments for caveats, failures, crashes, or configuration differences.
+
+Use output/decode speed rather than prompt-ingestion speed where the runtime reports them separately:
+
+```text
+tokens per second = generated output tokens / generation time in seconds
+```
+
+If only a combined prompt-and-generation speed is available, label it as **combined speed**. Do not directly compare results calculated using different methods.
+
+### What Contributors Should Record
+
+Include the following information with every contribution:
+
+- test date and contributor name;
+- hardware model, CPU, RAM, and GPU/VRAM if applicable;
+- operating system;
+- model name, model file/version, and quantization;
+- runtime and runtime version, such as LM Studio or OpenCode;
+- context length, GPU offload, CPU threads, batch sizes, and other non-default settings;
+- generated tokens, generation time, and tokens per second for all three runs;
+- median tokens per second, rating, and concise comments for each use case;
+- whether the test used standalone chat or an IDE/agentic integration.
+
+For the Python automation test, use the shared [`children_nutrition.csv`](../assets/children_nutrition.csv) fixture. Do not clean or modify the fixture before giving the prompt to the model.
+
+### Evaluation Guidance
+
+- **PowerShell:** The response should contain code only, select files added today, exclude directories, and write their names to `today_supplies_logs.txt`. Treat use of modification time instead of creation/copy time as a caveat unless it is explained.
+- **Python automation:** The script should use `pandas`, remove rows missing `Height_cm` or `Weight_kg`, uppercase `Region`, preserve missing region values, and save `cleaned_nutrition.csv` without an extra index column.
+- **Troubleshooting:** The response should explain that `KeyError: 'id'` means the dictionary has no exact `id` key. It should not invent the actual key name without seeing the dictionary.
+- **Code explanation:** The response should identify the Euclidean algorithm and explain that it returns the greatest common divisor. It should reject the misleading sorting hint when it conflicts with the code.
+
+### Contribution Workflow
+
+1. Add a new hardware/model result or update an existing untested entry.
+2. Preserve existing contributors' measurements; do not replace them with results from different hardware.
+3. Add any material configuration or stability differences to the participant observations.
+4. Keep follow-up experiments separate from the four baseline prompts.
+5. Open a pull request containing the updated matrix and enough run details for another contributor to reproduce the test.
+
+---
+
+## 6. Benchmark Prompts
+
+Copy only the text inside each code block into a new conversation.
+
+### 6.1 PowerShell Script Generation
+
+```text
+Write a simple PowerShell script that looks at a specific folder containing daily distribution logs, lists all files that were added today, and logs their names to a text file called 'today_supplies_logs.txt'. Just give me the code.
+```
+
+### 6.2 Python Automation Script
+
+Use the shared [`children_nutrition.csv`](../assets/children_nutrition.csv) test file. Place a copy in the generated script's working directory, run the script, and confirm that it creates `cleaned_nutrition.csv` with rows containing blank `Height_cm` or `Weight_kg` values removed and all nonblank `Region` values converted to uppercase.
+
+```text
+Write a clean Python script using the pandas library that reads a file called 'children_nutrition.csv', removes any rows where the 'Height_cm' or 'Weight_kg' columns are blank, updates all text in the 'Region' column to UPPERCASE, and saves it as 'cleaned_nutrition.csv'.
+```
+
+### 6.3 Error and Log Troubleshooting
+
+```text
+Why is my Python script crashing? This script calculates child growth indicators. Explain the issue simply and give me the fixed line of code:
+
+Traceback (most recent call last):
+  File "growth_tracker.py", line 5, in <module>
+    print("Child ID: " + child_record['id'])
+KeyError: 'id'
+```
+
+### 6.4 Code Explanation
+
+```text
+In plain English, what does this function do step-by-step? (Hint: It relates to sorting vaccine shipment batch IDs).
+
+int mystery(int a, int b) {
+    while (b != 0) {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+```
+
+---
+
 > For technical details on model quantization, capability trade-offs, and context window limits, see [CAVEATS.md](../CAVEATS.md).
