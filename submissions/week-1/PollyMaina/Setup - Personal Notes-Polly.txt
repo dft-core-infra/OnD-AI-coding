@@ -1,0 +1,352 @@
+# On-Device AI Coding Setup - Personal Notes (Polly Maina)
+
+**Date:** 09 July 2026  
+**Objective:** Complete TeamOne On-Device AI Coding setup and prepare for Week 1 Tetris Challenge.
+
+***
+
+# 1. Initial Issue - LM Studio Model Download
+
+The QuickStart guide contained outdated commands.
+
+### Command attempted
+
+```powershell
+lms get qwen/qwen-3.6-35b-instruct-gguf --quant q4_k_m
+```
+
+### Error
+
+```text
+error: unknown option '--quant'
+```
+
+### Resolution
+
+The current LM Studio CLI no longer supports the `--quant` parameter in that format.
+
+Instead:
+
+```powershell
+lms search qwen
+```
+
+then
+
+```powershell
+lms get <model-name>
+```
+
+and select the quantization during download if prompted.
+
+Reference came from the TeamOne On-Device AI Coding QuickStart discussion.
+
+***
+
+# 2. OpenCode Installation Issue
+
+### Command attempted
+
+```powershell
+npm install -g @anthropic-ai/opencode
+```
+
+### Error
+
+```text
+npm ERR! 404 Not Found
+```
+
+### Cause
+
+The package does not exist in the npm registry anymore.
+
+### Working command
+
+```powershell
+npm install -g opencode-ai
+```
+
+### Validation
+
+```powershell
+opencode --version
+```
+
+Successful installation confirmed.
+
+***
+
+# 3. LM Studio Environment Validation
+
+### Verify LM Studio
+
+```powershell
+lms --version
+```
+
+### Start Server
+
+```powershell
+lms server start
+```
+
+### Check Server
+
+```powershell
+lms server status
+```
+
+Expected:
+
+```text
+Server running
+```
+
+### Check Loaded Models
+
+```powershell
+lms ps
+```
+
+Expected:
+
+```text
+Loaded model
+```
+
+***
+
+# 4. OpenCode Configuration Confusion
+
+
+
+Saved this json configuration file in my project folder (local).
+
+Example:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        "qwen": {}
+      }
+    }
+  },
+  "model": "lmstudio/qwen"
+}
+```
+
+***
+
+# 5. OpenCode Functional Test #1
+
+### Prompt
+
+```text
+write a hello world PowerShell script
+```
+
+### Result
+
+OpenCode created:
+
+```text
+C:\Users\pmaina\hello.ps1
+```
+
+Contents:
+
+```powershell
+"Hello, World!"
+```
+
+### Outcome
+
+-OpenCode working
+
+-LM Studio connected
+
+-File creation working
+
+-Local inference working
+
+***
+
+# 6. OpenCode Functional Test #2 (Real Test)
+
+### Prompt
+
+Create a PowerShell script that checks BitLocker status.
+
+### Generated Script
+
+```powershell
+Get-BitLockerVolume
+```
+
+(or equivalent generated logic)
+
+### Script Executed
+
+```powershell
+.\Get-BitLockerStatus.ps1
+```
+
+### Output
+
+```text
+MountPoint             C:
+VolumeStatus           FullyEncrypted
+ProtectionStatus       On
+EncryptionPercentage   100
+KeyProtector           {RecoveryPassword, Tpm}
+```
+
+### Validation
+
+Confirmed:
+
+* Device encrypted
+* BitLocker protection ON
+* TPM protector present
+* Recovery Password protector present
+
+### Outcome
+
+-PowerShell generation working
+
+-BitLocker cmdlets understood
+
+-Script executed without modification
+
+-Local coding workflow validated
+
+***
+
+# 7. TeamOne Week 1 Challenge
+
+From the TeamOne On-Device AI Coding Kick-Off:
+
+### Deliverable
+
+```text
+One-file colorful HTML Tetris game
+```
+
+Requirements:
+
+* Generated using local AI
+* No cloud AI
+* Single HTML file
+* Generated via Model Chat UI
+* No coding IDE required
+* Purpose is to test the local model, not your coding ability
+
+
+***
+
+# 8. Recommended Tetris Prompt
+
+Used directly inside LM Studio Chat.
+
+```text
+Create a complete one-file colorful HTML Tetris game.
+
+Requirements:
+- Everything must be in a single HTML file.
+- Include all HTML, CSS, and JavaScript in the same file.
+- No external libraries.
+- No internet dependencies.
+- Runs locally in a browser.
+- Colorful arcade style.
+- Score display.
+- Level display.
+- Lines cleared counter.
+- Next piece preview.
+- Arrow keys for movement.
+- Spacebar for hard drop.
+- P for pause.
+- R for restart.
+- Game over screen.
+- Output only the HTML file.
+```
+
+***
+
+# 9. Submission Structure
+
+Repository structure:
+
+```text
+submissions/
+└── week-1/
+    └── pmaina/
+        ├── tetris.html
+        └── README.md
+```
+
+Per TeamOne guidance, each participant should submit the game plus a short description of hardware, model and approach.
+
+***
+
+# 10. Current Working Toolchain
+
+### Inference Engine
+
+```text
+LM Studio
+```
+
+### Model
+
+```text
+Qwen local model
+```
+
+### Coding Agent
+
+```text
+OpenCode
+```
+
+### OS
+
+```text
+Windows 11
+```
+
+### Successful Flow
+
+```text
+Prompt
+  ↓
+OpenCode
+  ↓
+LM Studio
+  ↓
+Qwen
+  ↓
+Generate PowerShell
+  ↓
+Execute locally
+```
+
+***
+
+# Lessons Learned
+
+1. The QuickStart document contains some outdated commands.
+2. `@anthropic-ai/opencode` no longer exists.
+3. Use `opencode-ai` instead.
+4. LM Studio + Qwen + OpenCode is working successfully.
+5. BitLocker script generation is a good validation test.
+6. Week 1 challenge should be done in LM Studio Chat, not OpenCode.
+

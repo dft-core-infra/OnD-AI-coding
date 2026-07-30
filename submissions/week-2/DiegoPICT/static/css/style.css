@@ -1,0 +1,167 @@
+/* 
+ * Neon Tetris Styles 
+ */
+:root {
+    --bg-color: #0a0a0c;
+    --panel-color: #1a1a2e;
+    --text-color: #e0e0e0;
+    --accent-color: #00f2ff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.game-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 2px solid var(--accent-color);
+    border-radius: 10px;
+    background: var(--panel-color);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+}
+
+canvas {
+    border: 2px solid #333;
+    background-color: #000;
+    box-shadow: inset 0 0 10px #000;
+}
+
+.stats-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 150px;
+}
+
+.stat-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+h1 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+.controls-hint {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+}
+
+#game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    border: 2px solid red;
+    text-align: center;
+    display: none;
+    z-index: 10;
+}
+
+button {
+    background: var(--accent-color);
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button.secondary-btn {
+    background: #444;
+}
+
+/* Submit Score Form */
+.submit-score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#player-name {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--accent-color);
+    background: #000;
+    color: white;
+    text-align: center;
+    width: 200px;
+    font-size: 1rem;
+}
+
+#player-name:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 242, 255, 0.5);
+}
+
+/* Leaderboard */
+.leaderboard-container {
+    margin-top: 30px;
+    text-align: center;
+    width: 300px;
+}
+
+.leaderboard-container h3 {
+    color: var(--accent-color);
+    letter-spacing: 2px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(0, 242, 255, 0.4);
+}
+
+#leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.leaderboard-entry {
+    background: var(--panel-color);
+    padding: 8px 12px;
+    border-radius: 5px;
+    border-left: 3px solid var(--accent-color);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.leaderboard-entry .rank {
+    color: #888;
+    min-width: 25px;
+}
+
+.leaderboard-entry .name {
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 8px;
+}
+
+.leaderboard-entry .score-val {
+    color: var(--accent-color);
+    font-weight: bold;
+}

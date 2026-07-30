@@ -1,0 +1,13 @@
+Child_ID,Age_years,Height_cm,Weight_kg,Region
+C001,5,108.4,18.2,north
+C002,7,121.0,23.5,South
+C003,6,,20.1,east
+C004,8,128.7,,WEST
+C005,4,101.2,16.4,central
+C006,9,134.5,29.8,North
+C007,10,,32.6,south
+C008,3,95.6,14.1,East
+C009,11,143.3,37.2,west
+C010,6,115.8,21.0,
+C011,12,151.4,42.7,Central
+C012,5,109.1,,north

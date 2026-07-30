@@ -19,20 +19,22 @@ gantt
     tickInterval 1week
 
     section Prep
-    Week 0 · Reading Materials & Setup        :done, 2026-06-02, 17d
+    Week 0 · Reading Materials & Setup        :done, 2026-06-02, 24d
 
     section Setup Challenge
-    Week 1 · Generate Tetris with Local AI    :2026-06-19, 7d
+    Week 1 · Generate Tetris with Local AI    :2026-06-26, 7d
 
     section Coding Experience
-    Week 2 · Enhance Tetris in an IDE         :2026-06-26, 7d
+    Week 2 · Enhance Tetris in an IDE         :2026-07-03, 6d
 
     section Automation & Scripting
-    Week 3 · Build a CLI / Automation Tool    :2026-07-03, 7d
+    Week 3 · Build a CLI / Automation Tool    :2026-07-09, 8d
 
     section MVP Challenge
-    Weeks 1–4 · Build toward final MVP        :crit, 2026-06-19, 28d
+    Weeks 1–4 · Build toward final MVP        :crit, 2026-06-26, 29d
 ```
+
+> **Schedule Update (2026-06-22):** All dates shifted back one week due to kickoff meeting conflict. **New Week 4 kickoff: Thursday, June 25, 2026.**
 
 ---
 
@@ -40,7 +42,6 @@ gantt
 **Theme:** Make it work locally
 
 ### Objective
-Set up a working local AI inference on a UNICEF laptop, use chat, code with chat.
 
 ### Deliverable
 - One-file **colorful HTML Tetris game** generated using local AI
@@ -78,7 +79,7 @@ Pick a meaningful use case, Build a useful scripting or CLI solution.
 ## 🚀 Week 4 — MVP Challenge
 **Theme:** Make it real
 
-> **Starts at the time of the virtual kickoff session.** Scope and team pairing confirmed at kickoff — attend or coordinate async within 24 hours.
+> **Kickoff:** Thursday, June 25, 2026. Scope and team pairing confirmed at kickoff — attend or coordinate async within 24 hours. Week 4 work runs July 17–24.
 
 ### Objective
 Deliver a minimum viable product using local AI that demonstrates clear, practical value.

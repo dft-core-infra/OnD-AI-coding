@@ -165,8 +165,7 @@ The following are **reliably production-usable with normal review** when using t
 
 ### For IT Professionals on Current-Gen Hardware (32GB)
 - **Run Gemma4-4B as your always-on default.** It is the fastest (17.88 tok/s on Gen6) and most stable model, and it covers the bulk of daily scripting, explanation, and lookup work.
-- **Use Gemma4-12B for dedicated heavier tasks** such as deep log diagnosis, richer documentation, and single-file app generation. Avoid recommending or deploying 27B/30B-class models on a 32GB laptop.
-- **Choose 64GB RAM for serious use that requires models above 12B.** This is preferable to operating 27B/30B-class models at the edge of a 32GB machine's capacity.
+- **Reserve Gemma4-12B for dedicated heavy tasks** (deep log diagnosis, richer documentation, single-file app generation) — and run them when memory-heavy enterprise apps are *not* competing for RAM, to avoid crashes.
 - **Use LM Studio's standalone chat, not agentic IDE iteration.** One-shot `opencode run` is fine; multi-step agentic loops are not reliable.
 - **Keep local work inside the proven band** — scripts, explanation, troubleshooting, docs — and send multi-file refactors, architecture, and niche-API work to cloud.
 

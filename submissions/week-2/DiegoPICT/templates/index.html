@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Tetris - Welcome</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        /* Additional styles for the welcome screen */
+        .welcome-container {
+            text-align: center;
+            padding: 50px;
+            border: 2px solid var(--accent-color);
+            border-radius: 20px;
+            background: var(--panel-color);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        .welcome-container h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
+        }
+
+        .welcome-container p {
+            margin-bottom: 40px;
+            line-height: 1.6;
+            color: #bbb;
+        }
+
+        .btn-start {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-start:hover {
+            background: #fff;
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #fff;
+        }
+
+        /* Scoreboard styles */
+        .scoreboard-container {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            background: rgba(0, 242, 255, 0.05);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scoreboard-container h3 {
+            color: var(--accent-color);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .score-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 15px;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+        }
+
+        .score-item:last-child {
+            border-bottom: none;
+        }
+
+        .score-item .name {
+            color: #eee;
+        }
+
+        .score-item .score {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body style="background-color: #0a0a0a; color: #fff;">
+
+    <div class="welcome-container">
+        <h2>NEON TETRIS</h2>
+        <p>
+            Welcome to the neon-soaked world of classic block stacking. 
+            Test your reflexes, manage your space, and climb the leaderboard.
+        </p>
+        <button class="btn-start" onclick="window.location.href='/game'">Start Game</button>
+    </div>
+
+    <div class="scoreboard-container">
+        <h3>High Scores</h3>
+        <ul id="score-list" class="score-list">
+            <li>Loading scores...</li>
+        </ul>
+    </div>
+
+    <script>
+        async function loadScores() {
+            try {
+                const response = await fetch('/api/scores');
+                const data = await response.json();
+                const list = document.getElementById('score-list');
+                list.innerHTML = '';
+
+                if (data.scores && data.scores.length > 0) {
+                    data.scores.forEach((item, index) => {
+                        const li = document.createElement('li');
+                        li.className = 'score-item';
+                        li.innerHTML = `
+                            <span class="name">${index + 1}. ${item.name}</span>
+                            <span class="score">${item.score.toLocaleString()}</span>
+                        `;
+                        list.appendChild(li);
+                    });
+                } else {
+                    list.innerHTML = '<li>No scores yet!</li>';
+                }
+            } catch (error) {
+                console.error('Error loading scores:', error);
+                document.getElementById('score-list').innerHTML = '<li>Error loading scores.</li>';
+            }
+        }
+
+        window.onload = loadScores;
+    </script>
+
+</body>
+</html>
