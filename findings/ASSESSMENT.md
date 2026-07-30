@@ -1,16 +1,3 @@
-<style>
-a {
-	text-decoration: none;
-	color: #464feb;
-}
-tr th, tr td {
-	border: 1px solid #e6e6e6;
-}
-tr th {
-	background-color: #f5f5f5;
-}
-</style>
-
 # Assessment — On-Device AI Coding for Corporate IT
 
 **For:** Corporate colleagues, SMEs, managers, citizen developers, and technology enthusiasts  
