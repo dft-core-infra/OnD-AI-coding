@@ -35,6 +35,9 @@ QUICKSTART got you running. This document explains how the pieces work together,
 
 **For IT Pros:** Think of opencode as a specialized command-line tool that talks to the AI model running in LM Studio.
 
+> [!WARNING]
+> **Field note:** The engagement validated local IDE connection and one-shot generation, but not dependable iterative agentic use. Use the interface for bounded tasks; for iterative local work, standalone chat was the reliable participant-tested fallback. See the [assessment findings](findings/ASSESSMENT.md) for scope and context.
+
 ---
 
 ## The LM Studio Server
@@ -242,6 +245,9 @@ If experiencing memory pressure:
 3. **Switch to smaller model:** 9B instead of 35B (performance tradeoff)
 
 **Monitor with Task Manager:** Watch RAM usage during inference. If you see disk activity during requests, you're paging—adjust settings.
+
+> [!TIP]
+> **Field note:** A model loading successfully is not the same as a usable working setup. Participant testing found that larger models could load on some machines yet be too slow or memory-intensive for dependable iteration. Test the kind of task you actually plan to do. See the [assessment findings](findings/ASSESSMENT.md) for context.
 
 ### Improving Response Time
 

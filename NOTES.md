@@ -216,6 +216,14 @@ These commands and configurations work on Windows 11 24H2 systems with 32GB RAM,
 
 **Your responsibility:** Verify commands work on YOUR system. Use `--help` flags, check authoritative docs, test before relying on scripts.
 
+> [!TIP]
+> **Field note:** When adding a result, record the model file and quantization, runtime and version, context and batching settings, generated-token count, generation time, and whether the test used chat or an IDE integration. These details make another participant's measurement interpretable. See the [use-case matrix](findings/USE-CASE-MATRIX.md) for the full record.
+
+---
+
+> [!TIP]
+> **Field note:** For comparable local measurements, run a warm-up first, start a fresh conversation for each measured prompt, repeat each prompt three times, and report the median generated-output speed. Keep prompt-ingestion and output/decode speed distinct. See the [benchmark method](findings/USE-CASE-MATRIX.md#5-local-llm-benchmark-method) for details.
+
 ---
 
 ## Common Failure Modes & Fixes

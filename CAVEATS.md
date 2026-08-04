@@ -8,6 +8,9 @@ But local AI for coding isn't a drop-in replacement for cloud models. It's a dif
 
 This document provides that assessment. Not to discourage—local AI coding delivers genuine value—but to tune expectations so you make informed decisions.
 
+> [!TIP]
+> **Field note:** The findings distinguish direct measurements, participant observations, unvalidated hardware tiers, and untested tasks. Read the linked evidence at that level of confidence rather than treating every recommendation as equally validated. See the [hardware findings](findings/HARDWARE-TIERS.md) and [assessment](findings/ASSESSMENT.md) for scope.
+
 ---
 
 <div align="center">
@@ -191,6 +194,9 @@ You can also supplement local models with targeted research—official docs, Sta
 If you work extensively with cutting-edge frameworks, rapidly-evolving APIs, or niche technologies, the local model's knowledge staleness and smaller training corpus will hinder you. You'll spend more time correcting hallucinated API usage, filling knowledge gaps, and cross-referencing documentation.
 
 For these use cases, cloud models' larger scale and more recent training make a substantial productivity difference. Budget for hybrid workflows—use local for general coding, cloud APIs for specialized/recent domain assistance—or accept slower progress on cutting-edge work.
+
+> [!WARNING]
+> **Field note:** In the engagement, multi-file refactoring, complex architecture work, security-sensitive review, and iterative local IDE agents were not dependable local workflows. Use local tools as assistance for bounded work and retain review or a different workflow for these cases. See the [assessment findings](findings/ASSESSMENT.md) and [use-case matrix](findings/USE-CASE-MATRIX.md) for context.
 
 ---
 
