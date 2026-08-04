@@ -392,6 +392,9 @@ Try: "Create PowerShell backup script for Windows Server 2022 that backs up C:\D
 
 **Review and adapt:** AI generates starting points, not finished products. Your expertise validates and adapts the output to your specific environment.
 
+> [!TIP]
+> **Field note:** The strongest participant-tested local tasks were bounded: standard scripts, code explanation, error/log troubleshooting, and documentation. Keep the first request self-contained, review the result, then refine it in small steps. See the [assessment findings](findings/ASSESSMENT.md) and [use-case matrix](findings/USE-CASE-MATRIX.md) for context.
+
 ---
 
 ## When Local AI Helps Most
@@ -419,6 +422,9 @@ Try: "Create PowerShell backup script for Windows Server 2022 that backs up C:\D
 **Context limits:** 32k tokens is substantial but finite. Very long requests or many back-and-forth iterations might hit limits.
 
 **Not a replacement for learning:** AI helps you be more productive with knowledge you have. It's not a substitute for understanding what you're doing.
+
+> [!WARNING]
+> **Field note:** The engagement did not test API integration code. Treat generated guidance for either common or recent APIs as unvalidated until you check current official documentation and test it in your environment. See the [assessment findings](findings/ASSESSMENT.md) for scope.
 
 ---
 

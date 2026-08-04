@@ -163,6 +163,9 @@ opencode "write a hello world PowerShell script"
 
 **Success looks like:** Model responds with PowerShell code. Response time varies (10-30 seconds typical for first request).
 
+> [!TIP]
+> **Field note:** Treat a successful one-shot request as a connection check, not proof that an iterative IDE agent will be reliable. In engagement testing, one-shot local generation worked, while iterative agentic workflows timed out across the tested configurations. For longer back-and-forth work, use the local chat interface and keep the task focused. See the [assessment findings](findings/ASSESSMENT.md) for scope and context.
+
 ---
 
 ## Step 7: Verify Single-Model Setup
@@ -176,6 +179,9 @@ lms ps
 **Confirm:** Only one model shows "loaded" status. This is important for 32GB stability.
 
 **Why it matters:** Loading multiple large models simultaneously exhausts RAM and causes system paging. Single-model operation keeps inference fast and stable.
+
+> [!TIP]
+> **Field note:** If the system slows down or freezes, reduce competing load before assuming the model is broken: close background applications, keep prompts narrow, and clear or restart long sessions. These were practical participant workarounds on constrained devices. See the [hardware findings](findings/HARDWARE-TIERS.md) for context.
 
 ---
 
