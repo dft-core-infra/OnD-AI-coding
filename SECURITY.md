@@ -1,58 +1,38 @@
-# Security Policy
+# Security Guidance
 
-## Scope and Security Posture
+## Information Security Disclaimer
 
-**OnD-AI-coding** is an informal educational exercise for ICT staff interested in exploring local AI coding with open tools and open-weights models. It is **not** a formal ICT initiative, product, or supported platform.
+This **OnD-AI-coding Guide** is an educational exercise by and for IT professionals and individuals interested in exploring local AI coding with open tools and open-weights models. Its content is provided for learning and discussion. It has not been prepared as a security standard or assessment.
 
-Accordingly, this project has **no enterprise security posture**:
+References to third-party tools (for example, LM Studio, opencode, and open-weights models) are informational. When using any referenced tools or code, follow applicable security best practices and, in enterprise environments, the established software and security policies.
 
-- The tools and models referenced (e.g., LM Studio, opencode, open-weights models) have **not** been security-reviewed, risk-assessed, or approved for organizational use.
-- Nothing in this repository was designed with, or evaluated against, **the Organization's Enterprise Cybersecurity controls** — endpoint protection, identity and access management, data loss prevention, software supply-chain vetting, logging/monitoring, or vulnerability management.
-- All components should be treated as **unvetted third-party software** carrying supply-chain, licensing, and integrity risks that participants must assess for themselves.
+**In general:**
+Use or adoption of material from this repository should take account of the relevant security, privacy, legal, licensing, procurement, operational, and data-handling considerations. Where organizational policies or processes apply, they govern that use.
 
-## Supported Environments
+## Guidance for Experimentation
 
-| Environment | Supported |
-| --- | --- |
-| Personal or isolated lab hardware | ✅ Yes — intended use |
-| Organization-managed laptops and endpoints | ❌ No — do not install |
-| Organization accounts (any privilege level) | ❌ No — do not sign in or configure with |
-| Organization high-privilege accounts (admin, global admin, service, break-glass) | ❌ Never |
-| Organization code, documents, credentials, or personal data as model input | ❌ No |
-| Official software development work for the Organization | ❌ No — see below |
+For exploratory use, consider starting in an isolated lab environment with non-sensitive or synthetic data.
 
-## Rules for Safe Experimentation
+- When using these tools on managed devices, with organizational accounts, or with organizational information, follow the policies and processes that apply to that environment.
+- Local execution does not, on its own, establish that inputs, outputs, dependencies, or generated code are suitable for sensitive or regulated use.
+- Take particular care with high-privilege accounts and credentials in experimental workflows, applying the controls required by the relevant environment.
+- Review and test AI-generated scripts and code using the controls appropriate to the target environment before relying on them.
+- Do not include organizational details, credentials, internal hostnames or configuration, personal data, screenshots or any other details potentially associated with an organization in contributions to this public repository.
 
-If you explore this material, keep it **entirely outside the Organization's boundaries**:
+## Organizational Adoption
 
-1. **Personal or lab hardware only.** Never run the inference engines, models, or coding agents described here on Organization-managed devices. The install commands in this repo (e.g., `winget`) must not be executed on managed endpoints.
-2. **No organizational identities.** Never authenticate any tool in this stack with Organization accounts — and under no circumstances with high-privilege accounts.
-3. **No organizational data.** "Local" does not mean "reviewed" or "safe for sensitive data." Do not feed Organization code, documents, credentials, or personal data into these tools.
-4. **Treat AI-generated output as untrusted.** Scripts and code produced during experimentation must never be run against, or carried into, the Organization's systems or environments.
-5. **Mind what you contribute.** Challenge submissions to this public repository must not contain hostnames, internal configuration details, credentials, or screenshots from work devices.
+An organization may choose to evaluate or adopt any of the tools or approaches discussed here. The organization's applicable security, privacy, legal, procurement, and operational policies and processes should guide that decision.
 
-## Official Software Development
-
-Software built or maintained for the Organization must follow the **Organization's Software Development Lifecycle (SDLC) standards** and use approved, governed platforms, including:
-
-- **Azure DevOps** — source control, pipelines, and work management under organizational governance
-- **GitHub Advanced Security** — code scanning, secret scanning, dependency review, and supply-chain protection
-- Approved AI-assisted development tooling provisioned by ICT, operating within the Organization's identity, data protection, and monitoring boundaries
-
-These platforms exist precisely because they carry the enterprise controls this project does not.
+Nothing in this repository supersedes those policies and processes or constitutes authorization to deploy a tool, process organizational data, or use an organizational identity.
 
 ## Reporting a Vulnerability or Concern
 
-This is an educational repository with no formal security support or SLA.
+This is an educational repository with no formal security support or service-level commitment.
 
-- **Issues in this repo's content or guides** (e.g., a documented command that creates unnecessary risk, an unsafe default configuration): open a GitHub issue or pull request.
-- **Vulnerabilities in the third-party tools or models** referenced here (LM Studio, opencode, model weights): report them upstream to the respective maintainers — this project does not triage or patch third-party software.
-- **Suspected misuse involving Organization accounts, devices, or data**: report through standard Organization ICT/Cybersecurity incident channels, not through this repository.
+- For issues in this repository's content or guides, such as unsafe documentation or defaults, open a GitHub issue or pull request.
+- Report vulnerabilities in referenced third-party tools or models to their respective maintainers; this project does not triage or patch third-party software.
+- For a concern involving an organization's accounts, devices, or data, use that organization's established security or incident-reporting channels.
 
 ## Supported Versions
 
 None. Content is provided as-is for learning purposes and may be outdated at any time. No security patches, advisories, or maintenance commitments apply.
-
----
-
-*Questions about approved development tooling, AI platforms, or security review of new technologies should be directed to your ICT/Cybersecurity function through standard channels.*
