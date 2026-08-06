@@ -25,6 +25,17 @@ An organization may choose to evaluate or adopt any of the tools or approaches d
 
 Nothing in this repository supersedes those policies and processes or constitutes authorization to deploy a tool, process organizational data, or use an organizational identity.
 
+## Use Case Examples
+
+| Environment | Supported |
+| --- | --- |
+| Personal or isolated lab hardware | ✅ Yes — intended use |
+| Organization-managed laptops and endpoints | ❌ No — do not install |
+| Organization accounts (any privilege level) | ❌ No — do not sign in or configure with |
+| Organization high-privilege accounts (admin, global admin, service, break-glass) | ❌ Never |
+| Organization code, documents, credentials, or personal data as model input | ❌ No |
+| Official software development work for the Organization | ❌ No — see below |
+
 ## Reporting a Vulnerability or Concern
 
 This is an educational repository with no formal security support or service-level commitment.
