@@ -15,7 +15,6 @@ For exploratory use, consider starting in an isolated lab environment with non-s
 
 - When using these tools on managed devices, with organizational accounts, or with organizational information, follow the policies and processes that apply to that environment.
 - Local execution does not, on its own, establish that inputs, outputs, dependencies, or generated code are suitable for sensitive or regulated use.
-- Take particular care with high-privilege accounts and credentials in experimental workflows, applying the controls required by the relevant environment.
 - Review and test AI-generated scripts and code using the controls appropriate to the target environment before relying on them.
 - Do not include organizational details, credentials, internal hostnames or configuration, personal data, screenshots or any other details potentially associated with an organization in contributions to this public repository.
 
